@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="search-index.js"></script>
+    <script src="scripts.js"></script>
+    <style>
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Adjust opacity as needed */
+        }
+
+        .search-results-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            padding: 40px; /* Increased padding */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjust width as needed */
+            max-width: 1000px; /* Increased max width */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hamburger-menu" id="hamburger-menu">☰</div>
+        <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="searchBox">
+            <input class="searchInput" type="text" name="" placeholder="Search">
+            <button class="searchButton" href="#">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="cart-icon">
+            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <main>
+        <div class="hero">
+            <img src="images/caliocean.webp" alt="Hero Image">
+            <div class="search-results-container">
+                <section class="search-results">
+                    <h1>Search Results</h1>
+                    <div id="results"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menu functionality
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const overlay = document.getElementById('overlay');
+
+            const toggleMenu = () => {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+            };
+
+            hamburgerMenu.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            // Search results functionality
+            const resultsContainer = document.getElementById('results');
+            const results = JSON.parse(sessionStorage.getItem('searchResults'));
+            console.log('Loaded search results:', results); // Log loaded results
+
+            if (results && results.length > 0) {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('result-item');
+                    resultItem.innerHTML = `
+                        <h2>${result.name}</h2>
+                        <p>${result.description}</p>
+                    `;
+                    resultsContainer.appendChild(resultItem);
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>No results found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

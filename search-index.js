@@ -28,6 +28,6 @@ const searchIndex = [
         name: "Tackle Box",
         description: "Organized tackle box for all your fishing gear.",
         keywords: ["tackle", "box", "organized", "gear", "fishing"]
-    },
+    }
     // Add more products as needed
 ];
