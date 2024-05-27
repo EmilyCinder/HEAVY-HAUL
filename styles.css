@@ -1,5 +1,3 @@
-/* styles.css */
-
 @font-face {
     font-family: 'Mestiza Sans';
     src: url('fonts/mestiza-sans-regular.woff2') format('woff2'),
@@ -45,9 +43,6 @@ header {
 .hamburger-menu {
     font-size: 32px; /* Increase icon size */
     cursor: pointer;
-}
-
-.hamburger-menu {
     margin-right: auto;
     margin-left: 20px; /* Move hamburger menu slightly to the right */
 }
@@ -112,12 +107,11 @@ header {
 
 .searchBox {
     position: relative;
-    background: #2f3640;
+    background: #2f3640; /* Dark grey color */
     height: 40px;
     border-radius: 40px;
     padding: 10px;
-    margin-left: 0; /* Move search bar more to the left */
-    margin-right: 40px; /* Add space between search bar and cart icon */
+    margin-left: 20px; /* Adjust as needed */
 }
 
 .searchBox:hover > .searchInput {
@@ -126,8 +120,8 @@ header {
 }
 
 .searchBox:hover > .searchButton {
-    background: white;
-    color: #2f3640;
+  background: white;
+  color : #2f3640;
 }
 
 .searchButton {
@@ -157,11 +151,11 @@ header {
 }
 
 .cart-icon-img {
-    width: 28px; /* Smaller size */
+    width: 50px; /* Slightly bigger size */
     height: auto;
     cursor: pointer;
-    filter: invert(100%); /* Same shade as the search icon */
-    margin-left: 10px; /* Move to the left */
+    filter: brightness(0) invert(0); /* Dark grey color */
+    margin-left: 20px; /* Adjust as needed */
 }
 
 @media screen and (max-width: 620px) {

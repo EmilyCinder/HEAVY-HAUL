@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.slider');
-    
+
     // Adding delay before hiding the slider
     setTimeout(() => {
         slider.style.opacity = '0'; // Fade out the slider
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle search functionality
     const searchButton = document.querySelector('.searchButton');
     const searchInput = document.querySelector('.searchInput');
-    
+
     searchButton.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent default form submission behavior
         const query = searchInput.value;
