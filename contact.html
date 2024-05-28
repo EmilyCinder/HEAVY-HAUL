@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Crab Snare Co.</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="search-index.js"></script>
+    <script src="scripts.js"></script>
+    <style>
+        /* Internal CSS for the contact page */
+        body {
+            font-family: "Mestiza Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 100vh;
+            background: url('images/caliocean.webp') no-repeat center center/cover;
+            background-size: cover;
+        }
+
+        .overlay-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(242, 230, 216, 0.7); /* Beige overlay with less opacity */
+            z-index: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 120px; /* Increased height for the header */
+            padding: 0 20px;
+            background-color: #F2E6D8; /* Beige background color */
+            font-weight: 700; /* Bold font weight for the header */
+            position: relative;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        .hamburger-menu, .logo, .searchBox, .cart-icon {
+            display: inline-block;
+        }
+
+        .hamburger-menu {
+            font-size: 32px; /* Increase icon size */
+            cursor: pointer;
+            margin-right: auto;
+            margin-left: 20px; /* Move hamburger menu slightly to the right */
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hidden off screen */
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px; /* Ensure links start from top */
+        }
+
+        .nav-menu.active {
+            left: 0; /* Show menu */
+        }
+
+        .nav-menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu ul li {
+            padding: 15px 20px;
+            border-bottom: none; /* Remove border lines */
+        }
+
+        .nav-menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 18px; /* Adjust font size if needed */
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .searchBox {
+            position: relative;
+            background: #2f3640; /* Dark grey color */
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+            margin-left: 20px; /* Adjust as needed */
+        }
+
+        .searchBox:hover > .searchInput {
+            width: 240px;
+            padding: 0 6px;
+        }
+
+        .searchBox:hover > .searchButton {
+            background: white;
+            color: #2f3640;
+        }
+
+        .searchButton {
+            color: white;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.4s;
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            float: left;
+            padding: 0;
+            color: white;
+            font-size: 16px;
+            transition: 0.4s;
+            line-height: 40px;
+            width: 0px;
+        }
+
+        .cart-icon-img {
+            width: 50px; /* Slightly bigger size */
+            height: auto;
+            cursor: pointer;
+            filter: brightness(0) invert(0); /* Dark grey color */
+            margin-left: 20px; /* Adjust as needed */
+        }
+
+        .contact-section {
+            max-width: 420px;
+            margin: 150px auto; /* Move down the form */
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-section h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .contact-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-input {
+            color: black;
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            border-radius: 5px;
+            line-height: 22px;
+            background-color: white;
+            border: 2px solid #000;
+            transition: all 0.3s;
+            padding: 13px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: 0;
+        }
+
+        .feedback-input:focus {
+            border: 2px solid #555;
+        }
+
+        textarea.feedback-input {
+            height: 150px;
+            line-height: 150%;
+            resize: vertical;
+        }
+
+        [type="submit"] {
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            width: 100%;
+            background: black;
+            border-radius: 5px;
+            border: 0;
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            transition: all 0.3s;
+            margin-top: -4px;
+            font-weight: 700;
+        }
+
+        [type="submit"]:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-bg"></div>
+    <header>
+        <div class="hamburger-menu" id="hamburger-menu">☰</div>
+        <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="searchBox">
+            <input class="searchInput" type="text" placeholder="Search">
+            <button class="searchButton">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="cart-icon">
+            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <main>
+        <section class="contact-section">
+            <h1>Contact Us</h1>
+            <form action="contact-form-handler.php" method="post">
+                <input name="name" type="text" class="feedback-input" placeholder="Name" required />
+                <input name="email" type="email" class="feedback-input" placeholder="Email" required />
+                <textarea name="text" class="feedback-input" placeholder="Comment" required></textarea>
+                <input type="submit" value="SUBMIT" />
+            </form>
+        </section>
+    </main>
+</body>
+</html>

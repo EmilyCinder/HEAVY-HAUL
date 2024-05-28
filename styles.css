@@ -1,3 +1,7 @@
+/* styles.css */
+
+/* ... existing styles ... */
+
 @font-face {
     font-family: 'Mestiza Sans';
     src: url('fonts/mestiza-sans-regular.woff2') format('woff2'),
@@ -21,7 +25,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #F2E6D8; /* Updated background color */
+    background-color: #F2E6D8; /* Beige background */
 }
 
 header {
@@ -120,8 +124,8 @@ header {
 }
 
 .searchBox:hover > .searchButton {
-  background: white;
-  color : #2f3640;
+    background: white;
+    color : #2f3640;
 }
 
 .searchButton {
@@ -187,25 +191,6 @@ header {
     }
 }
 
-
-
-
-
-
-
-/* styles.css */
-
-/* ... existing styles ... */
-
-.hero {
-    position: relative;
-    width: 100%;
-}
-
-/* styles.css */
-
-/* ... existing styles ... */
-
 .hero {
     position: relative;
     width: 100%;
@@ -222,25 +207,24 @@ header {
     max-width: 1200px; /* Maximum width */
     margin: 0 auto; /* Center the panel */
     background-color: white; /* White background */
-    padding: 20px; /* Padding inside the panel */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
     margin-top: -20px; /* Make the top of the white box touch the hero image */
+    padding: 20px 0; /* Padding inside the panel */
 }
 
 .featured-product {
     text-align: center;
-    margin-top: 20px; /* Space from the top of the panel */
+    margin-top: 100px; /* Move the section further down */
 }
 
 .featured-product .section-title {
-    font-size: 32px;
+    font-size: 48px; /* Increased font size */
     margin-bottom: 20px;
     color: #333;
 }
 
 .featured-product .product {
     display: inline-block;
-    margin: 20px;
+    margin: 60px; /* Increase margin from the title */
     transition: transform 0.3s;
 }
 
