@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Crab Snare Co.</title>
+    <title>About Us - Crab Snare Co.</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Internal CSS for the contact page */
-        body {
+        /* Internal CSS for the about page */
+        html, body {
             font-family: "Mestiza Sans", sans-serif;
             font-weight: 400;
             font-style: normal;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            position: relative;
-            min-height: 100vh;
+            height: 100%;
+        }
+
+        body {
             background: url('images/caliocean.webp') no-repeat center center/cover;
             background-size: cover;
+            position: relative;
         }
 
         .overlay-bg {
@@ -26,7 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(242, 230, 216, 0.7); /* Beige overlay with less opacity */
+            background-color: rgba(242, 230, 216, 0.5); /* Beige overlay with 0.5 opacity */
             z-index: 0;
         }
 
@@ -36,7 +39,7 @@
             align-items: center;
             height: 120px; /* Increased height for the header */
             padding: 0 20px;
-            background-color: #F2E6D8; /* Beige background color */
+            background-color: #F2E6D8; /* Solid beige background color */
             font-weight: 700; /* Bold font weight for the header */
             position: relative;
             z-index: 1000; /* Ensure header is above other content */
@@ -164,80 +167,117 @@
             margin-left: 20px; /* Adjust as needed */
         }
 
-        .contact-section {
-            max-width: 420px;
-            margin: 150px auto; /* Move down the form */
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .main-content {
+            display: flex;
+            flex: 1;
             position: relative;
             z-index: 1;
+            margin-top: 140px; /* Margin from the bottom of the navigation bar */
         }
 
-        .contact-section h1 {
+        .about-section {
+            flex: 1;
+            padding: 40px;
+            color: #333;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px; /* Smaller width */
+            margin-left: 20px; /* Margin from center */
+        }
+
+        .about-section h1 {
             font-size: 32px;
             margin-bottom: 20px;
             color: #333;
             text-align: center;
         }
 
-        .contact-section form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .feedback-input {
-            color: black;
-            font-family: Helvetica, Arial, sans-serif;
-            font-weight: 500;
+        .about-section p {
             font-size: 18px;
-            border-radius: 5px;
-            line-height: 22px;
-            background-color: white;
-            border: 2px solid #000;
-            transition: all 0.3s;
-            padding: 13px;
-            margin-bottom: 15px;
-            width: 100%;
-            box-sizing: border-box;
-            outline: 0;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: justify;
         }
 
-        .feedback-input:focus {
-            border: 2px solid #555;
-        }
-
-        textarea.feedback-input {
-            height: 150px;
-            line-height: 150%;
-            resize: vertical;
-        }
-
-        [type="submit"] {
-            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-            width: 100%;
-            background: black;
-            border-radius: 5px;
-            border: 0;
-            cursor: pointer;
-            color: white;
+        .about-section .mission {
             font-size: 24px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            transition: all 0.3s;
-            margin-top: -4px;
             font-weight: 700;
+            color: #333;
+            margin-top: 30px;
+            text-align: center;
         }
 
-        [type="submit"]:hover {
-            background: #333;
+        .image-section {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        .image-section::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('images/dad.jpeg') no-repeat center center/cover;
+            background-size: cover;
+            animation: slideUp 2s forwards;
+        }
+
+        .image-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
+            pointer-events: none;
+        }
+
+        @keyframes slideUp {
+            0% {
+                top: 100%;
+            }
+            100% {
+                top: 0;
+            }
         }
     </style>
+    <script>
+        // JavaScript for hamburger menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const overlay = document.getElementById('overlay');
 
+            const toggleMenu = () => {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+            };
 
-    
-  
+            hamburgerMenu.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            // Ensure menu closes when a menu link is clicked
+            document.querySelectorAll('.nav-menu ul li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            });
+
+            // Ensure menu closes when overlay is clicked
+            overlay.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="overlay-bg"></div>
@@ -259,36 +299,18 @@
             </button>
         </div>
         <div class="cart-icon">
-            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
+            <img src="path/to/your/cart-icon.png" alt="Cart Icon" class="cart-icon-img">
         </div>
     </header>
-    <div class="overlay" id="overlay"></div>
-    <main>
-        <section class="contact-section">
-            <h1>Contact Us</h1>
-            <form action="https://formspree.io/f/myyravvd" method="POST">
-                <input name="name" type="text" class="feedback-input" placeholder="Name" required />
-                <input name="email" type="email" class="feedback-input" placeholder="Email" required />
-                <textarea name="message" class="feedback-input" placeholder="Comment" required></textarea>
-                <input type="submit" value="SUBMIT" />
-            </form>
+    <main class="main-content">
+        <section class="about-section">
+            <h1>About Crab Snare Co.</h1>
+            <p>Welcome to Crab Snare Co.! We are dedicated to providing the best quality crab snares to enthusiasts and professionals alike. Our journey began with a passion for crabbing and a desire to innovate the tools used in this exciting activity.</p>
+            <p>Founded by a team of experienced crabbers, we understand the importance of reliable and effective equipment. Our products are designed with precision and tested rigorously to ensure they meet the highest standards.</p>
+            <p>At Crab Snare Co., we believe in sustainability and responsible crabbing. Our products are made from durable materials that minimize environmental impact while maximizing efficiency.</p>
+            <p class="mission">Our Mission: To enhance the crabbing experience through innovation, quality, and sustainability.</p>
         </section>
+        <section class="image-section"></section>
     </main>
-    <script>
-        // JavaScript for hamburger menu
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburgerMenu = document.getElementById('hamburger-menu');
-            const navMenu = document.getElementById('nav-menu');
-            const overlay = document.getElementById('overlay');
-
-            const toggleMenu = () => {
-                navMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-            };
-
-            hamburgerMenu.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
-        });
-    </script>
 </body>
 </html>
