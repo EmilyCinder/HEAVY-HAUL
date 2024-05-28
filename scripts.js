@@ -1,5 +1,3 @@
-// scripts.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.slider');
 
@@ -10,10 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
             slider.style.display = 'none';
         }, 300); // Wait 300ms after fading out
     }, 2000); // Slide-down animation duration (2s) + delay (0.3s)
-
-    document.querySelector('.view-product').addEventListener('click', () => {
-        window.location.href = 'product-page.html'; // Redirect to product page
-    });
 
     // Handle hamburger menu functionality
     const hamburgerMenu = document.getElementById('hamburger-menu');

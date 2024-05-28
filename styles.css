@@ -187,40 +187,81 @@ header {
     }
 }
 
+
+
+
+
+
+
+/* styles.css */
+
+/* ... existing styles ... */
+
+.hero {
+    position: relative;
+    width: 100%;
+}
+
+/* styles.css */
+
+/* ... existing styles ... */
+
+.hero {
+    position: relative;
+    width: 100%;
+}
+
 .hero img {
     width: 100%;
-    height: 100vh; /* Ensure the hero image fills its space */
-    object-fit: cover; /* Cover the entire space */
+    height: 100vh;
+    object-fit: cover;
+}
+
+.content-backdrop {
+    width: 80%; /* Center panel width */
+    max-width: 1200px; /* Maximum width */
+    margin: 0 auto; /* Center the panel */
+    background-color: white; /* White background */
+    padding: 20px; /* Padding inside the panel */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    margin-top: -20px; /* Make the top of the white box touch the hero image */
 }
 
 .featured-product {
-    padding: 20px;
     text-align: center;
+    margin-top: 20px; /* Space from the top of the panel */
+}
+
+.featured-product .section-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .featured-product .product {
     display: inline-block;
     margin: 20px;
+    transition: transform 0.3s;
 }
 
-.product img {
-    width: 200px;
+.featured-product .product img {
+    width: 600px; /* Enlarged the photo */
     height: auto;
+    border-radius: 10px; /* Border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
 }
 
-.price {
-    font-size: 20px;
+.featured-product .product:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.featured-product .product-title {
+    margin: 20px 0 10px; /* Increased margin */
+    font-size: 24px;
     color: #333;
 }
 
-.view-product {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.view-product:hover {
-    background-color: #0056b3;
+.featured-product .price {
+    font-size: 20px;
+    color: #333;
 }
