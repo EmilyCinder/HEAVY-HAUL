@@ -249,3 +249,71 @@ header {
     font-size: 20px;
     color: #333;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+    }
+
+    .searchBox {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .cart-icon {
+        margin-bottom: 10px;
+    }
+
+    .hero img {
+        height: auto; /* Adjust height for smaller screens */
+    }
+
+    .content-backdrop {
+        width: 90%; /* Adjust panel width for smaller screens */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .featured-product .product img {
+        width: 100%; /* Adjust image width for smaller screens */
+    }
+
+    .nav-menu ul li {
+        padding: 10px 20px; /* Adjust padding for smaller screens */
+    }
+
+    .nav-menu ul li a {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .searchBox {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .content-backdrop {
+        width: 100%; /* Adjust panel width for smaller screens */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .featured-product .section-title {
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .featured-product .product-title {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .featured-product .price {
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+}

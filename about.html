@@ -15,6 +15,8 @@
             padding: 0;
             box-sizing: border-box;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         body {
@@ -24,7 +26,7 @@
         }
 
         .overlay-bg {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -43,6 +45,7 @@
             font-weight: 700; /* Bold font weight for the header */
             position: relative;
             z-index: 1000; /* Ensure header is above other content */
+            width: 100%;
         }
 
         .hamburger-menu, .logo, .searchBox, .cart-icon {
@@ -169,21 +172,31 @@
 
         .main-content {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
             flex: 1;
             position: relative;
             z-index: 1;
-            margin-top: 140px; /* Margin from the bottom of the navigation bar */
+            padding: 20px;
+        }
+
+        .about-section, .image-section {
+            flex: 1;
+            max-width: 45%;
+            margin: 20px;
         }
 
         .about-section {
-            flex: 1;
-            padding: 40px;
+            padding: 20px; /* Reduced padding */
             color: #333;
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px; /* Smaller width */
-            margin-left: 20px; /* Margin from center */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 400px; /* Reduced height */
         }
 
         .about-section h1 {
@@ -210,41 +223,87 @@
         }
 
         .image-section {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            width: 50%;
-        }
-
-        .image-section::before {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 100vh;
             background: url('images/dad.jpeg') no-repeat center center/cover;
             background-size: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: slideUp 2s forwards;
-        }
-
-        .image-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
-            pointer-events: none;
+            height: 400px; /* Reduced height */
         }
 
         @keyframes slideUp {
             0% {
-                top: 100%;
+                transform: translateY(100%);
             }
             100% {
-                top: 0;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .about-section, .image-section {
+                max-width: 100%;
+                margin: 10px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo {
+                position: static;
+                transform: none;
+                margin-left: 20px;
+            }
+
+            .searchBox, .cart-icon {
+                margin: 10px 20px;
+            }
+        }
+
+        footer {
+            background: #F2E6D8;
+            position: relative;
+            height: 100px; /* Adjust as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .wave {
+            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
+            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
+            background-size: 50% 100%;
+            bottom: -5%;
+            height: calc(var(--height, 0) * 1vh);
+            left: 0;
+            opacity: var(--opacity);
+            position: absolute;
+            right: 0;
+            width: calc(var(--width, 0) * 1vw);
+            will-change: transform;
+        }
+
+        .wave:nth-of-type(1) {
+            z-index: 1;
+        }
+
+        .wave:nth-of-type(2) {
+            z-index: 2;
+        }
+
+        .wave:nth-of-type(3) {
+            z-index: 3;
+        }
+
+        @keyframes wave {
+            to {
+                transform: translate(-50%, 0);
             }
         }
     </style>
@@ -304,13 +363,15 @@
     </header>
     <main class="main-content">
         <section class="about-section">
-            <h1>About Crab Snare Co.</h1>
-            <p>Welcome to Crab Snare Co.! We are dedicated to providing the best quality crab snares to enthusiasts and professionals alike. Our journey began with a passion for crabbing and a desire to innovate the tools used in this exciting activity.</p>
-            <p>Founded by a team of experienced crabbers, we understand the importance of reliable and effective equipment. Our products are designed with precision and tested rigorously to ensure they meet the highest standards.</p>
-            <p>At Crab Snare Co., we believe in sustainability and responsible crabbing. Our products are made from durable materials that minimize environmental impact while maximizing efficiency.</p>
-            <p class="mission">Our Mission: To enhance the crabbing experience through innovation, quality, and sustainability.</p>
+            <h1></h1>
+            <p></p>
         </section>
         <section class="image-section"></section>
     </main>
+    <footer>
+        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+    </footer>
 </body>
 </html>
