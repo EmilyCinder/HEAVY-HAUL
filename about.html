@@ -17,6 +17,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         body {
@@ -50,6 +51,7 @@
 
         .hamburger-menu, .logo, .searchBox, .cart-icon {
             display: inline-block;
+            flex-shrink: 0; /* Prevent shrinking */
         }
 
         .hamburger-menu {
@@ -124,6 +126,7 @@
             border-radius: 40px;
             padding: 10px;
             margin-left: 20px; /* Adjust as needed */
+            margin-right: 20px; /* Added right margin */
         }
 
         .searchBox:hover > .searchInput {
@@ -167,7 +170,7 @@
             height: auto;
             cursor: pointer;
             filter: brightness(0) invert(0); /* Dark grey color */
-            margin-left: 20px; /* Adjust as needed */
+            margin-left: 10px; /* Adjusted left margin */
         }
 
         .main-content {
@@ -340,6 +343,7 @@
 </head>
 <body>
     <div class="overlay-bg"></div>
+    <div class="overlay" id="overlay"></div>
     <header>
         <div class="hamburger-menu" id="hamburger-menu">☰</div>
         <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
