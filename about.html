@@ -7,32 +7,26 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* Internal CSS for the about page */
-        html, body {
+        body {
             font-family: "Mestiza Sans", sans-serif;
             font-weight: 400;
             font-style: normal;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
-
-        body {
+            position: relative;
+            min-height: 100vh;
             background: url('images/caliocean.webp') no-repeat center center/cover;
             background-size: cover;
-            position: relative;
         }
 
         .overlay-bg {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(242, 230, 216, 0.5); /* Beige overlay with 0.5 opacity */
+            background-color: rgba(242, 230, 216, 0.7); /* Beige overlay with less opacity */
             z-index: 0;
         }
 
@@ -42,16 +36,14 @@
             align-items: center;
             height: 120px; /* Increased height for the header */
             padding: 0 20px;
-            background-color: #F2E6D8; /* Solid beige background color */
+            background-color: #F2E6D8; /* Beige background color */
             font-weight: 700; /* Bold font weight for the header */
             position: relative;
             z-index: 1000; /* Ensure header is above other content */
-            width: 100%;
         }
 
         .hamburger-menu, .logo, .searchBox, .cart-icon {
             display: inline-block;
-            flex-shrink: 0; /* Prevent shrinking */
         }
 
         .hamburger-menu {
@@ -125,7 +117,7 @@
             height: 40px;
             border-radius: 40px;
             padding: 10px;
-            margin-left: 10px; /* Reduced left margin */
+            margin-left: 20px; /* Adjust as needed */
         }
 
         .searchBox:hover > .searchInput {
@@ -164,32 +156,32 @@
             width: 0px;
         }
 
-        .cart-icon {
-            margin-left: 10px; /* Reduced left margin */
-        }
-
         .cart-icon-img {
             width: 50px; /* Slightly bigger size */
             height: auto;
             cursor: pointer;
             filter: brightness(0) invert(0); /* Dark grey color */
+            margin-left: 20px; /* Adjust as needed */
         }
 
         .main-content {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             flex: 1;
             position: relative;
             z-index: 1;
             padding: 20px;
+            height: calc(100vh - 120px - 100px); /* Adjusted to account for header and footer */
         }
 
         .about-section, .image-section {
             flex: 1;
             max-width: 45%;
             margin: 20px;
+            height: 400px;
+            width: 600px; /* Equal height for both sections */
         }
 
         .about-section {
@@ -201,7 +193,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 400px; /* Reduced height */
         }
 
         .about-section h1 {
@@ -236,7 +227,6 @@
             align-items: center;
             justify-content: center;
             animation: slideUp 2s forwards;
-            height: 400px; /* Reduced height */
         }
 
         @keyframes slideUp {
@@ -252,6 +242,12 @@
             .about-section, .image-section {
                 max-width: 100%;
                 margin: 10px;
+                height: auto; /* Adjust height for smaller screens */
+            }
+
+            .main-content {
+                flex-direction: column;
+                align-items: center;
             }
 
             header {
@@ -368,11 +364,10 @@
         </div>
     </header>
     <main class="main-content">
-        <section class="about-section">
-            <h1></h1>
-            <p></p>
-        </section>
         <section class="image-section"></section>
+        <section class="about-section">
+            
+        </section>
     </main>
     <footer>
         <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
