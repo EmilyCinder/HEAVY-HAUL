@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Crab Snare Co.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="checkout.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="hamburger-menu" id="hamburger-menu">☰</div>
+        <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="searchBox">
+            <input class="searchInput" type="text" placeholder="Search">
+            <button class="searchButton">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="cart-icon">
+            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <main>
+        <section class="checkout">
+            <h1>Checkout</h1>
+            <form id="payment-form">
+                <div id="dropin-container"></div>
+                <button type="submit">Complete Purchase</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const form = document.getElementById('payment-form');
+            const clientToken = await fetch('/client_token').then(response => response.text());
+
+            braintree.dropin.create({
+                authorization: clientToken,
+                container: '#dropin-container'
+            }, (createErr, instance) => {
+                if (createErr) {
+                    console.error(createErr);
+                    return;
+                }
+
+                form.addEventListener('submit', event => {
+                    event.preventDefault();
+
+                    instance.requestPaymentMethod((err, payload) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        fetch('/checkout', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ nonce: payload.nonce })
+                        }).then(response => {
+                            return response.json();
+                        }).then(result => {
+                            if (result.success) {
+                                alert('Payment successful!');
+                                // Clear cart
+                                localStorage.removeItem('cart');
+                                // Redirect to a success page or display a success message
+                            } else {
+                                alert('Payment failed. Please try again.');
+                            }
+                        }).catch(error => {
+                            console.error(error);
+                            alert('Payment failed. Please try again.');
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

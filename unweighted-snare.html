@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unweighted Snare - Crab Snare Co.</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Internal CSS for the unweighted snare product page */
+        body {
+            font-family: "Mestiza Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            min-height: 100vh;
+            background: #F2E6D8;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 120px;
+            padding: 0 20px;
+            background-color: #F2E6D8;
+            font-weight: 700;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .hamburger-menu, .logo, .searchBox, .cart-icon {
+            display: inline-block;
+        }
+
+        .hamburger-menu {
+            font-size: 32px;
+            cursor: pointer;
+            margin-right: auto;
+            margin-left: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu ul li {
+            padding: 15px 20px;
+        }
+
+        .nav-menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 18px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .searchBox {
+            position: relative;
+            background: #2f3640;
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        .searchBox:hover > .searchInput {
+            width: 240px;
+            padding: 0 6px;
+        }
+
+        .searchBox:hover > .searchButton {
+            background: white;
+            color: #2f3640;
+        }
+
+        .searchButton {
+            color: white;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.4s;
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            float: left;
+            padding: 0;
+            color: white;
+            font-size: 16px;
+            transition: 0.4s;
+            line-height: 40px;
+            width: 0px;
+        }
+
+        .cart-icon {
+            position: relative;
+            margin-left: 50px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cart-icon-img {
+            width: 50px;
+            height: auto;
+            filter: brightness(0) invert(0);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 0 5px;
+            font-size: 14px;
+        }
+
+        main {
+            margin-top: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            flex: 1;
+        }
+
+        .product-panel {
+            background-color: white;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .product-panel img {
+            width: 600px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .product-panel h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-panel p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .product-panel label {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product-panel input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-panel button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-panel button:hover {
+            background-color: #555;
+        }
+
+        .cart-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            text-align: center;
+        }
+
+        .cart-popup.active {
+            display: block;
+        }
+
+        .cart-popup img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .cart-popup h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .cart-popup p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .cart-popup button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-popup button:hover {
+            background-color: #555;
+        }
+
+        .cart-popup a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        footer {
+            background: #F2E6D8;
+            position: relative;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .wave {
+            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
+            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
+            background-size: 50% 100%;
+            bottom: -5%;
+            height: calc(var(--height, 0) * 1vh);
+            left: 0;
+            opacity: var(--opacity);
+            position: absolute;
+            right: 0;
+            width: calc(var(--width, 0) * 1vw);
+            will-change: transform;
+        }
+
+        .wave:nth-of-type(1) {
+            z-index: 1;
+        }
+
+        .wave:nth-of-type(2) {
+            z-index: 2;
+        }
+
+        .wave:nth-of-type(3) {
+            z-index: 3;
+        }
+
+        @keyframes wave {
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+    <script>
+        // JavaScript for hamburger menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const overlay = document.getElementById('overlay');
+            const cartPopup = document.getElementById('cart-popup');
+            const cartPopupClose = document.getElementById('cart-popup-close');
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartCount = document.querySelector('.cart-count');
+
+            const toggleMenu = () => {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+            };
+
+            hamburgerMenu.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            document.querySelectorAll('.nav-menu ul li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            });
+
+            overlay.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Cart functionality
+            const addToCartButton = document.getElementById('add-to-cart');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            addToCartButton.addEventListener('click', () => {
+                const productId = addToCartButton.dataset.productId;
+                const productName = addToCartButton.dataset.productName;
+                const productPrice = parseFloat(addToCartButton.dataset.productPrice);
+                const productQuantity = parseInt(document.getElementById('quantity').value);
+
+                const existingProductIndex = cart.findIndex(item => item.id === productId);
+
+                if (existingProductIndex > -1) {
+                    cart[existingProductIndex].quantity += productQuantity;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        quantity: productQuantity
+                    });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartIcon();
+                showCartPopup(productName, productPrice, productQuantity);
+            });
+
+            function updateCartIcon() {
+                const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+                cartCount.innerText = totalQuantity;
+            }
+
+            function showCartPopup(name, price, quantity) {
+                const popup = document.getElementById('cart-popup');
+                popup.querySelector('.product-name').innerText = name;
+                popup.querySelector('.product-price').innerText = `$${(price * quantity).toFixed(2)}`;
+                popup.querySelector('.product-quantity').innerText = `Quantity: ${quantity}`;
+                popup.classList.add('active');
+            }
+
+            cartPopupClose.addEventListener('click', () => {
+                cartPopup.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                cartPopup.classList.remove('active');
+            });
+
+            updateCartIcon();
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="hamburger-menu" id="hamburger-menu">☰</div>
+        <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="searchBox">
+            <input class="searchInput" type="text" placeholder="Search">
+            <button class="searchButton">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="cart-icon">
+            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
+            <span class="cart-count">0</span>
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <main>
+        <div class="product-panel">
+            <img src="images/snare.jpg" alt="Heavy Haul Unweighted Snare">
+            <h1>Heavy Haul Unweighted Snare</h1>
+            <p>Cost effective solution to effectively snare crabs! The unweighted crab snare allows you to attach whatever weight is best for your tidal and swell conditions that day. The slim cage design allows you to cast further, and the ruggedness of the bait enclosure means you can take whatever the surf throws at you. Just attach your desired weight to the 220-pound test duo-lock snap, and you’re ready to go!</p>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1">
+            <button id="add-to-cart" data-product-id="1" data-product-name="Heavy Haul Unweighted Snare" data-product-price="10.00">Add to Cart - $10.00</button>
+        </div>
+    </main>
+    <div id="cart-popup" class="cart-popup">
+        <span id="cart-popup-close" class="material-icons" style="cursor: pointer;">close</span>
+        <h2>Added to Cart</h2>
+        <img src="images/snare.jpg" alt="Product Image">
+        <h3 class="product-name"></h3>
+        <p class="product-quantity"></p>
+        <p class="product-price"></p>
+        <button onclick="window.location.href='cart.html'">Go to Cart</button>
+        <a href="#" onclick="document.getElementById('cart-popup').classList.remove('active')">Continue Shopping</a>
+    </div>
+    <footer>
+        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
+        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+    </footer>
+</body>
+</html>
