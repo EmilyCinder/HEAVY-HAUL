@@ -175,12 +175,28 @@ header {
     width: 0px;
 }
 
+.cart-icon {
+    position: relative;
+}
+
 .cart-icon-img {
     width: 50px; /* Slightly bigger size */
     height: auto;
     cursor: pointer;
     filter: brightness(0) invert(0); /* Dark grey color */
     margin-left: 20px; /* Adjust as needed */
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .hero {
