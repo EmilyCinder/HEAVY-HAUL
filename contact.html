@@ -157,18 +157,22 @@
             width: 0px;
         }
 
+        .cart-icon {
+            position: relative;
+            margin-left: 20px; /* Adjust as needed */
+        }
+
         .cart-icon-img {
             width: 50px; /* Slightly bigger size */
             height: auto;
             cursor: pointer;
             filter: brightness(0) invert(0); /* Dark grey color */
-            margin-left: 20px; /* Adjust as needed */
         }
 
         .cart-count {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 0;
+            right: 0;
             background-color: red;
             color: white;
             border-radius: 50%;
@@ -453,7 +457,8 @@
     <main>
         <section class="contact-section">
             <h1>Contact Us</h1>
-            <form action="https://formspree.io/f/myyravvd" method="POST">
+            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+            <form action="https://formspree.io/f/myyravvd" method="POST" target="dummyframe">
                 <input name="name" type="text" class="feedback-input" placeholder="Name" required />
                 <input name="email" type="email" class="feedback-input" placeholder="Email" required />
                 <textarea name="message" class="feedback-input" placeholder="Comment" required></textarea>
@@ -539,4 +544,3 @@
     </script>
 </body>
 </html>
-
