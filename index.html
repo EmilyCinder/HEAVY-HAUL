@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,78 @@
     <script src="search-index.js"></script>
     <script src="scripts.js"></script>
     <style>
-        /* Additional CSS for wave footer */
         html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
             overflow-x: hidden; /* Prevent horizontal scrolling */
         }
-
+        header {
+            background-color: #F2E6D8; /* Beige background */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .cart-icon {
+            position: relative;
+        }
+        .cart-icon img {
+            width: 30px;
+            height: auto;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 14px;
+        }
+        .hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px; /* Adjust as needed */
+            background: url('images/caliocean.webp') no-repeat center center;
+            background-size: cover;
+        }
+        .logo img {
+            width: 200px; /* Adjust the size of the logo image here */
+            height: auto;
+        }
+        .content-backdrop {
+            padding: 20px;
+        }
         footer {
             background: #F2E6D8;
             position: relative;
@@ -23,7 +90,6 @@
             justify-content: center;
             width: 100%;
         }
-
         .wave {
             animation: wave calc(var(--speed, 0) * 1s) infinite linear;
             background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
@@ -37,166 +103,25 @@
             width: calc(var(--width, 0) * 1vw);
             will-change: transform;
         }
-
         .wave:nth-of-type(1) {
             z-index: 1;
         }
-
         .wave:nth-of-type(2) {
             z-index: 2;
         }
-
         .wave:nth-of-type(3) {
             z-index: 3;
         }
-
         @keyframes wave {
             to {
                 transform: translate(-50%, 0);
             }
         }
-
-        /* Styles for the cart popup */
-        .cart-popup {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1001; /* Above other content */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        .cart-popup-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            max-width: 600px;
-            text-align: center; /* Center text content */
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .cart-product {
-            text-align: center;
-            margin-bottom: 20px; /* Add some space between product and button */
-        }
-
-        .cart-product img {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .go-to-cart {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 10px 0;
-        }
-
-        .go-to-cart:hover {
-            background-color: #555;
-        }
-
-        .continue-shopping {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: underline;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .continue-shopping:hover {
-            color: #555;
-        }
-
-        .cart-icon {
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 14px;
-        }
-
-        .hamburger-menu {
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-        .nav-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 250px;
-            background-color: white;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            padding-top: 60px; /* Space for the header */
-        }
-
-        .nav-menu.active {
-            display: block;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        .logo img {
-            width: 200px; /* Adjust the size of the logo image here */
-            height: auto;
-        }
     </style>
 </head>
 <body>
     <header>
-        <div class="hamburger-menu" id="hamburger-menu">☰</div>
-        <div class="logo"><img src="images/FullLogo_Transparent.png" alt="Crab Snare Co."></div>
-        <nav class="nav-menu" id="nav-menu">
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
@@ -204,21 +129,14 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <div class="searchBox">
-            <input class="searchInput" type="text" placeholder="Search">
-            <button class="searchButton">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
         <div class="cart-icon">
             <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
             <span class="cart-count">0</span>
         </div>
     </header>
-    <div class="overlay" id="overlay"></div>
     <main>
         <section class="hero">
-            <img src="images/caliocean.webp" alt="Hero Image">
+            <div class="logo"><img src="images/FullLogo_Transparent.png" alt="Crab Snare Co."></div>
         </section>
         <div class="content-backdrop">
             <section class="featured-product">
@@ -240,52 +158,12 @@
         <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
     </footer>
 
-    <!-- Cart Popup -->
-    <div id="cart-popup" class="cart-popup">
-        <div class="cart-popup-content">
-            <span class="close">&times;</span>
-            <h2>Added to Cart</h2>
-            <div class="cart-product">
-                <img src="" alt="Product Image" class="cart-product-image">
-                <p class="cart-product-name"></p>
-                <p class="cart-product-quantity"></p>
-                <p class="cart-product-price"></p>
-            </div>
-            <button class="go-to-cart">Go to Cart</button>
-            <a href="#" class="continue-shopping">Continue Shopping</a>
-        </div>
-    </div>
-
     <script>
-        // JavaScript for hamburger menu and cart functionality
         document.addEventListener('DOMContentLoaded', () => {
-            const hamburgerMenu = document.getElementById('hamburger-menu');
-            const navMenu = document.getElementById('nav-menu');
-            const overlay = document.getElementById('overlay');
             const cartIcon = document.querySelector('.cart-icon');
             const cartPopup = document.getElementById('cart-popup');
             const closePopup = document.querySelector('.close');
             const cartCountElement = document.querySelector('.cart-count');
-
-            const toggleMenu = () => {
-                navMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-            };
-
-            hamburgerMenu.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('.nav-menu ul li a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                });
-            });
-
-            overlay.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                overlay.classList.remove('active');
-            });
 
             cartIcon.addEventListener('click', () => {
                 displayCartPopup();
