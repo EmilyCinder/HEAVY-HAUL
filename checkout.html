@@ -4,15 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Crab Snare Co.</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="checkout.js" defer></script>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* Additional styling for the checkout page */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "Mestiza Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            height: 100%; /* Ensure body takes full height */
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #F2E6D8; /* Beige background */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .cart-link {
+            position: relative;
+            margin-left: 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .main-content {
+            flex: 1; /* Allow main content to grow and fill space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #F2E6D8; /* Beige background */
+            padding: 20px;
+        }
+        .checkout-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .checkout-item img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .checkout-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .checkout-button:hover {
+            background-color: #555;
+        }
+        footer {
+            background: #F2E6D8;
+            position: relative;
+            height: 100px; /* Adjust as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: auto;
+        }
+        .wave {
+            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
+            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
+            background-size: 50% 100%;
+            bottom: -5%;
+            height: calc(var(--height, 0) * 1vh);
+            left: 0;
+            opacity: var(--opacity);
+            position: absolute;
+            right: 0;
+            width: calc(var(--width, 0) * 1vw);
+            will-change: transform;
+        }
+        .wave:nth-of-type(1) {
+            z-index: 1;
+        }
+        .wave:nth-of-type(2) {
+            z-index: 2;
+        }
+        .wave:nth-of-type(3) {
+            z-index: 3;
+        }
+        @keyframes wave {
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="hamburger-menu" id="hamburger-menu">☰</div>
-        <div class="logo"><img src="logo.png" alt="Crab Snare Co."></div>
-        <nav class="nav-menu" id="nav-menu">
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
@@ -20,77 +158,123 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <div class="searchBox">
-            <input class="searchInput" type="text" placeholder="Search">
-            <button class="searchButton">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="cart-icon">
-            <img src="images/cart.png" alt="Cart Icon" class="cart-icon-img">
-        </div>
+        <a href="#" class="cart-link" id="cart-link">Cart</a>
     </header>
-    <div class="overlay" id="overlay"></div>
-    <main>
-        <section class="checkout">
-            <h1>Checkout</h1>
-            <form id="payment-form">
-                <div id="dropin-container"></div>
-                <button type="submit">Complete Purchase</button>
-            </form>
-        </section>
+    <main class="main-content">
+        <div class="checkout-container">
+            <h1 class="checkout-header">Checkout</h1>
+            <div id="checkout-items"></div>
+            <div class="checkout-total" id="checkout-total"></div>
+            <button class="checkout-button" id="proceed-to-payment">Proceed to Payment</button>
+        </div>
     </main>
     <footer>
         <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
         <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
         <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
     </footer>
+    <div class="cart-dropdown" id="cart-dropdown">
+        <div class="cart-content" id="cart-content"></div>
+        <div id="checkout-btn">Checkout</div>
+        <div id="close-cart">Close</div>
+    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const form = document.getElementById('payment-form');
-            const clientToken = await fetch('/client_token').then(response => response.text());
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartLink = document.getElementById('cart-link');
+            const cartDropdown = document.getElementById('cart-dropdown');
+            const cartContent = document.getElementById('cart-content');
+            const closeCartBtn = document.getElementById('close-cart');
+            const checkoutBtn = document.getElementById('checkout-btn');
 
-            braintree.dropin.create({
-                authorization: clientToken,
-                container: '#dropin-container'
-            }, (createErr, instance) => {
-                if (createErr) {
-                    console.error(createErr);
-                    return;
+            cartLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                cartDropdown.classList.toggle('active');
+                updateCartContent();
+            });
+
+            closeCartBtn.addEventListener('click', () => {
+                cartDropdown.classList.remove('active');
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target !== cartLink && !cartDropdown.contains(event.target)) {
+                    cartDropdown.classList.remove('active');
                 }
+            });
 
-                form.addEventListener('submit', event => {
-                    event.preventDefault();
+            const proceedToPayment = document.getElementById('proceed-to-payment');
+            const checkoutItems = document.getElementById('checkout-items');
+            const checkoutTotal = document.getElementById('checkout-total');
 
-                    instance.requestPaymentMethod((err, payload) => {
-                        if (err) {
-                            console.error(err);
-                            return;
-                        }
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-                        fetch('/checkout', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ nonce: payload.nonce })
-                        }).then(response => {
-                            return response.json();
-                        }).then(result => {
-                            if (result.success) {
-                                alert('Payment successful!');
-                                // Clear cart
-                                localStorage.removeItem('cart');
-                                // Redirect to a success page or display a success message
-                            } else {
-                                alert('Payment failed. Please try again.');
-                            }
-                        }).catch(error => {
-                            console.error(error);
-                            alert('Payment failed. Please try again.');
-                        });
+            const updateCheckoutPage = () => {
+                checkoutItems.innerHTML = '';
+                cart.forEach(product => {
+                    const item = document.createElement('div');
+                    item.classList.add('checkout-item');
+                    item.innerHTML = `
+                        <img src="images/snare.jpg" alt="${product.name}">
+                        <div>
+                            <h4>${product.name}</h4>
+                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
+                        </div>
+                    `;
+                    checkoutItems.appendChild(item);
+                });
+                const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+                checkoutTotal.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+            };
+
+            const updateCartContent = () => {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cartContent.innerHTML = '';
+
+                cart.forEach((product, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+
+                    cartItem.innerHTML = `
+                        <img src="images/snare.jpg" alt="${product.name}">
+                        <div>
+                            <div>${product.name}</div>
+                            <div>Quantity: ${product.quantity}</div>
+                            <div>Price: $${(product.price * product.quantity).toFixed(2)}</div>
+                        </div>
+                        <span class="cart-item-remove" data-index="${index}">Remove</span>
+                    `;
+
+                    cartContent.appendChild(cartItem);
+                });
+
+                const removeButtons = cartContent.querySelectorAll('.cart-item-remove');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const index = event.target.getAttribute('data-index');
+                        cart.splice(index, 1);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartContent();
+                        updateCartIcon();
+                        updateCheckoutPage();
                     });
                 });
+            };
+
+            const updateCartIcon = () => {
+                const totalQuantity = cart.reduce((sum, product) => sum + product.quantity, 0);
+                document.getElementById('cart-link').innerText = `Cart (${totalQuantity})`;
+            };
+
+            updateCheckoutPage();
+            updateCartIcon();
+
+            proceedToPayment.addEventListener('click', () => {
+                // Redirect to payment page or handle payment
+                alert('Proceeding to payment');
+            });
+
+            checkoutBtn.addEventListener('click', () => {
+                window.location.href = 'checkout.html';
             });
         });
     </script>

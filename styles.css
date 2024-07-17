@@ -325,3 +325,79 @@ footer {
         width: 100%;
     }
 }
+/* Additional CSS for the cart dropdown and cart link */
+.cart-link {
+    position: relative;
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cart-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.cart-dropdown.active {
+    display: block;
+}
+
+.cart-content {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.cart-item div {
+    flex: 1;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.cart-item-remove {
+    color: red;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#close-cart, #checkout-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#close-cart:hover, #checkout-btn:hover {
+    background-color: #555;
+}

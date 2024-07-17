@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unweighted Snare - Crab Snare Co.</title>
+    <title>Products - Crab Snare Co.</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Internal CSS for the unweighted snare product page */
+        /* Internal CSS for the products page */
         html, body {
             margin: 0;
             padding: 0;
@@ -14,7 +14,15 @@
             font-weight: 400;
             font-style: normal;
             overflow-x: hidden; /* Prevent horizontal scrolling */
+            height: 100%; /* Ensure body takes full height */
         }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         header {
             background-color: #F2E6D8; /* Beige background */
             padding: 10px 20px;
@@ -48,6 +56,7 @@
             color: #fff;
             border-radius: 5px;
         }
+
         .cart-link {
             position: relative;
             margin-left: 20px;
@@ -56,6 +65,7 @@
             font-size: 18px;
             cursor: pointer;
         }
+
         .cart-dropdown {
             position: absolute;
             top: 60px;
@@ -67,38 +77,46 @@
             display: none;
             z-index: 1000;
         }
+
         .cart-dropdown.active {
             display: block;
         }
+
         .cart-content {
             max-height: 400px;
             overflow-y: auto;
             padding: 20px;
         }
+
         .cart-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
         }
+
         .cart-item img {
             width: 50px;
             height: auto;
             margin-right: 10px;
         }
+
         .cart-item div {
             flex: 1;
         }
+
         .cart-total {
             text-align: right;
             margin-top: 10px;
             font-size: 16px;
         }
+
         .cart-item-remove {
             color: red;
             cursor: pointer;
             font-size: 14px;
         }
+
         #close-cart, #checkout-btn {
             display: block;
             margin: 10px auto;
@@ -110,62 +128,63 @@
             text-align: center;
             cursor: pointer;
         }
+
         #close-cart:hover, #checkout-btn:hover {
             background-color: #555;
         }
+
         .hero {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px; /* Adjust as needed */
+            height: 150px; /* Adjust as needed */
             background: url('images/caliocean.webp') no-repeat center center;
             background-size: cover;
         }
-        .logo img {
-            width: 200px; /* Adjust the size of the logo image here */
-            height: auto;
-        }
-        .content-backdrop {
+
+        .main-content {
+            flex: 1; /* Allow main content to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F2E6D8; /* Beige background */
             padding: 20px;
         }
-        .product-panel {
-            background-color: white;
+
+        .product-list {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-item {
+            background: white;
             padding: 20px;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            margin: 0 auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 40px); /* 3 items per row with 20px gap */
+            box-sizing: border-box;
+            text-align: center;
         }
-        .product-panel img {
+
+        .product-item img {
             width: 100%;
-            height: auto;
             border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .product-panel h1 {
-            font-size: 32px;
             margin-bottom: 10px;
-            color: #333;
         }
-        .product-panel p {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .product-panel label {
-            font-size: 18px;
-            color: #333;
-        }
-        .product-panel input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            font-size: 18px;
+
+        .product-item h2 {
+            font-size: 24px;
             margin: 10px 0;
+            color: #333;
         }
-        .product-panel button {
+
+        .product-item p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        .add-to-cart {
             background-color: #333;
             color: white;
             border: none;
@@ -174,10 +193,27 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
-        .product-panel button:hover {
+
+        .add-to-cart:hover {
             background-color: #555;
         }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .product-item {
+                width: calc(50% - 20px); /* 2 items per row with 20px gap */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .product-item {
+                width: 100%; /* 1 item per row */
+            }
+        }
+
+        /* Footer */
         footer {
             background: #F2E6D8;
             position: relative;
@@ -185,8 +221,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
         }
+
         .wave {
             animation: wave calc(var(--speed, 0) * 1s) infinite linear;
             background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
@@ -200,19 +236,105 @@
             width: calc(var(--width, 0) * 1vw);
             will-change: transform;
         }
+
         .wave:nth-of-type(1) {
             z-index: 1;
         }
+
         .wave:nth-of-type(2) {
             z-index: 2;
         }
+
         .wave:nth-of-type(3) {
             z-index: 3;
         }
+
         @keyframes wave {
             to {
                 transform: translate(-50%, 0);
             }
+        }
+
+        .social-links {
+            width: 44px;
+            position: fixed;
+            left: 1rem;
+            bottom: 1rem;
+        }
+
+        .social-link {
+            height: 44px;
+            width: 44px;
+            display: inline-block;
+        }
+
+        .social-link--twitter {
+            --saturation: 49%;
+            transition: fill 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-link--twitter path {
+            fill: hsl(203, var(--saturation), 53%);
+        }
+
+        .social-link--twitter:hover {
+            --saturation: 89%;
+        }
+
+        img, svg {
+            height: 60%;
+            width: 60%;
+        }
+
+        .cart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1001;
+            display: none;
+            text-align: center;
+        }
+
+        .cart-popup img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-popup h2 {
+            margin-bottom: 10px;
+        }
+
+        .cart-popup button, .cart-popup a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-popup button:hover, .cart-popup a:hover {
+            background-color: #555;
+        }
+
+        .cart-popup .close-popup {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #333;
         }
     </style>
 </head>
@@ -226,22 +348,27 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <a href="#" class="cart-link" id="cart-link">Cart</a>
+        <a href="#" class="cart-link" id="cart-link">Cart (<span class="cart-count">0</span>)</a>
     </header>
-    <main>
-        <div class="product-panel">
-            <img src="images/snare.jpg" alt="Heavy Haul Unweighted Snare">
-            <h1>Heavy Haul Unweighted Snare</h1>
-            <p>Cost effective solution to effectively snare crabs! The unweighted crab snare allows you to attach whatever weight is best for your tidal and swell conditions that day. The slim cage design allows you to cast further, and the ruggedness of the bait enclosure means you can take whatever the surf throws at you. Just attach your desired weight to the 220-pound test duo-lock snap, and you’re ready to go!</p>
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
-            <button id="add-to-cart" data-product-id="1" data-product-name="Heavy Haul Unweighted Snare" data-product-price="10.00">Add to Cart - $10.00</button>
+    <section class="hero"></section>
+    <main class="main-content">
+        <div class="product-list">
+            <div class="product-item">
+                <img src="images/snare.jpg" alt="Product Image">
+                <h2>Heavy Haul Unweighted Snare</h2>
+                <p>$10.00</p>
+                <button class="add-to-cart" onclick="addToCart('Heavy Haul Unweighted Snare', 10)">Add to Cart</button>
+            </div>
+            <!-- Add more product items here -->
         </div>
     </main>
     <footer>
         <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
         <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
         <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+        <div class="social-links">
+            <a class="social-link social-link--twitter" href="https://twitter.com/jh3yy" target="_blank" rel="noopener noreferrer" title="Catch me on Twitter"></a>
+        </div>
     </footer>
     <div class="cart-dropdown" id="cart-dropdown">
         <div class="cart-content" id="cart-content"></div>
@@ -257,86 +384,52 @@
             const closeCartBtn = document.getElementById('close-cart');
             const checkoutBtn = document.getElementById('checkout-btn');
 
-            cartLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                cartDropdown.classList.toggle('active');
-                updateCartContent();
-            });
-
-            closeCartBtn.addEventListener('click', () => {
-                cartDropdown.classList.remove('active');
-            });
-
-            window.addEventListener('click', (event) => {
-                if (event.target !== cartLink && !cartDropdown.contains(event.target)) {
-                    cartDropdown.classList.remove('active');
-                }
-            });
-
-            const addToCartButton = document.getElementById('add-to-cart');
-
-            addToCartButton.addEventListener('click', () => {
-                const productId = addToCartButton.dataset.productId;
-                const productName = addToCartButton.dataset.productName;
-                const productPrice = parseFloat(addToCartButton.dataset.productPrice);
-                const productQuantity = parseInt(document.getElementById('quantity').value);
-
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingProductIndex = cart.findIndex(item => item.id === productId);
-
-                if (existingProductIndex > -1) {
-                    cart[existingProductIndex].quantity += productQuantity;
-                } else {
-                    cart.push({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        quantity: productQuantity
-                    });
-                }
-
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartIcon();
-            });
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             const updateCartIcon = () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
                 const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
-                document.getElementById('cart-link').innerText = `Cart (${totalQuantity})`;
+                document.querySelector('.cart-count').innerText = totalQuantity;
             };
 
             const updateCartContent = () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
                 cartContent.innerHTML = '';
-
                 cart.forEach((product, index) => {
-                    const cartItem = document.createElement('div');
-                    cartItem.classList.add('cart-item');
-
-                    cartItem.innerHTML = `
+                    const item = document.createElement('div');
+                    item.classList.add('cart-item');
+                    item.innerHTML = `
                         <img src="images/snare.jpg" alt="${product.name}">
                         <div>
-                            <div>${product.name}</div>
-                            <div>Quantity: ${product.quantity}</div>
-                            <div>Price: $${(product.price * product.quantity).toFixed(2)}</div>
+                            <h4>${product.name}</h4>
+                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
                         </div>
-                        <span class="cart-item-remove" data-index="${index}">Remove</span>
+                        <span class="cart-item-remove" data-index="${index}">&times;</span>
                     `;
-
-                    cartContent.appendChild(cartItem);
+                    cartContent.appendChild(item);
                 });
-
-                const removeButtons = cartContent.querySelectorAll('.cart-item-remove');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const index = event.target.getAttribute('data-index');
-                        cart.splice(index, 1);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        updateCartIcon();
-                        updateCartContent();
-                    });
-                });
+                const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+                const totalEl = document.createElement('div');
+                totalEl.classList.add('cart-total');
+                totalEl.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+                cartContent.appendChild(totalEl);
             };
+
+            const toggleCartDropdown = () => {
+                cartDropdown.classList.toggle('active');
+                updateCartContent();
+            };
+
+            cartLink.addEventListener('click', toggleCartDropdown);
+            closeCartBtn.addEventListener('click', toggleCartDropdown);
+
+            cartContent.addEventListener('click', (event) => {
+                if (event.target.classList.contains('cart-item-remove')) {
+                    const index = event.target.getAttribute('data-index');
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartIcon();
+                    updateCartContent();
+                }
+            });
 
             checkoutBtn.addEventListener('click', () => {
                 window.location.href = 'checkout.html';
@@ -344,6 +437,26 @@
 
             updateCartIcon();
         });
+
+        const addToCart = (productName, productPrice) => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(product => product.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartIcon();
+        };
+
+        const updateCartIcon = () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+            document.querySelector('.cart-count').innerText = totalQuantity;
+        };
     </script>
 </body>
 </html>

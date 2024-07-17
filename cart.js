@@ -1,37 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const addToCartButton = document.getElementById('add-to-cart');
-    const cartIcon = document.querySelector('.cart-icon');
+    const cartLink = document.getElementById('cart-link');
+    const cartDropdown = document.getElementById('cart-dropdown');
+    const cartContent = document.getElementById('cart-content');
+    const closeCartBtn = document.getElementById('close-cart');
+    const checkoutBtn = document.getElementById('checkout-btn');
 
-    // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    addToCartButton.addEventListener('click', () => {
-        const productId = addToCartButton.dataset.productId;
-        const productName = addToCartButton.dataset.productName;
-        const productPrice = parseFloat(addToCartButton.dataset.productPrice);
-        const productQuantity = parseInt(document.getElementById('quantity').value);
+    const updateCartIcon = () => {
+        const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+        document.querySelector('.cart-count').innerText = totalQuantity;
+    };
 
-        const existingProductIndex = cart.findIndex(item => item.id === productId);
+    const updateCartContent = () => {
+        cartContent.innerHTML = '';
+        cart.forEach((product, index) => {
+            const item = document.createElement('div');
+            item.classList.add('cart-item');
+            item.innerHTML = `
+                <img src="images/snare.jpg" alt="${product.name}">
+                <div>
+                    <h4>${product.name}</h4>
+                    <p>${product.quantity} x $${product.price.toFixed(2)}</p>
+                </div>
+                <span class="cart-item-remove" data-index="${index}">&times;</span>
+            `;
+            cartContent.appendChild(item);
+        });
+        const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+        const totalEl = document.createElement('div');
+        totalEl.classList.add('cart-total');
+        totalEl.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+        cartContent.appendChild(totalEl);
+    };
 
-        if (existingProductIndex > -1) {
-            cart[existingProductIndex].quantity += productQuantity;
-        } else {
-            cart.push({
-                id: productId,
-                name: productName,
-                price: productPrice,
-                quantity: productQuantity
-            });
+    const toggleCartDropdown = () => {
+        cartDropdown.classList.toggle('active');
+        updateCartContent();
+    };
+
+    cartLink.addEventListener('click', toggleCartDropdown);
+    closeCartBtn.addEventListener('click', toggleCartDropdown);
+
+    cartContent.addEventListener('click', (event) => {
+        if (event.target.classList.contains('cart-item-remove')) {
+            const index = event.target.getAttribute('data-index');
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartIcon();
+            updateCartContent();
         }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartIcon();
     });
 
-    function updateCartIcon() {
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        cartIcon.setAttribute('data-count', totalItems);
-    }
+    checkoutBtn.addEventListener('click', () => {
+        window.location.href = 'checkout.html';
+    });
 
     updateCartIcon();
 });
+
+const addToCart = (productName, productPrice) => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(product => product.name === productName);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartIcon();
+};
+
+const updateCartIcon = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+    document.querySelector('.cart-count').innerText = totalQuantity;
+};
