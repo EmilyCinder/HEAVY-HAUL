@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Crab Snare Co.</title>
-    <link href="styles.css" rel="stylesheet">
     <style>
         /* Basic styling */
         html, body {
             margin: 0;
             padding: 0;
             font-family: "Mestiza Sans", sans-serif;
-            font-weight: 400;
-            font-style: normal;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
         header {
-            background-color: #F2E6D8; /* Beige background */
+            background-color: #F2E6D8;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -36,23 +33,12 @@
             display: flex;
             gap: 20px;
         }
-        nav ul li {
-            display: inline;
-        }
         nav ul li a {
             text-decoration: none;
             color: #333;
             padding: 10px 15px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
         }
         .cart-link {
-            position: relative;
-            margin-left: 20px;
             color: #333;
             text-decoration: none;
             font-size: 18px;
@@ -74,10 +60,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .checkout-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
         .checkout-item {
             display: flex;
             justify-content: space-between;
@@ -87,22 +69,12 @@
             padding-bottom: 10px;
         }
         .checkout-item img {
-            width: 150px; /* Larger image */
+            width: 100px;
             height: auto;
             margin-right: 20px;
-            border-radius: 10px;
-        }
-        .checkout-item div {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         .checkout-item .item-info {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
         .checkout-item .item-controls {
             display: flex;
@@ -110,20 +82,13 @@
         }
         .checkout-item .item-controls input {
             width: 50px;
-            padding: 5px;
             margin: 0 10px;
             text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 5px;
         }
         .checkout-item .item-controls .item-remove {
             cursor: pointer;
             color: red;
             margin-left: 10px;
-            font-size: 14px;
-        }
-        .checkout-item .item-controls .item-remove:hover {
-            text-decoration: underline;
         }
         .checkout-total {
             text-align: center;
@@ -131,7 +96,6 @@
             font-size: 18px;
         }
         .checkout-button {
-            display: block;
             width: 100%;
             padding: 10px;
             background-color: #333;
@@ -140,11 +104,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             margin-top: 10px;
-        }
-        .checkout-button:hover {
-            background-color: #555;
         }
         .empty-cart {
             text-align: center;
@@ -154,83 +114,11 @@
         }
         footer {
             background: #F2E6D8;
-            position: relative;
             height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
             margin-top: auto;
-        }
-        .wave {
-            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
-            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
-            background-size: 50% 100%;
-            bottom: -5%;
-            height: calc(var(--height, 0) * 1vh);
-            left: 0;
-            opacity: var(--opacity);
-            position: absolute;
-            right: 0;
-            width: calc(var(--width, 0) * 1vw);
-            will-change: transform;
-        }
-        .wave:nth-of-type(1) {
-            z-index: 1;
-        }
-        .wave:nth-of-type(2) {
-            z-index: 2;
-        }
-        .wave:nth-of-type(3) {
-            z-index: 3;
-        }
-        @keyframes wave {
-            to {
-                transform: translate(-50%, 0);
-            }
-        }
-        .cart-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 300px;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        .cart-dropdown.active {
-            display: block;
-        }
-        .cart-dropdown ul {
-            list-style: none;
-            padding: 10px;
-            margin: 0;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .cart-dropdown ul li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .cart-dropdown ul li img {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-        .cart-dropdown ul li div {
-            flex: 1;
-        }
-        .cart-dropdown ul li p {
-            margin: 0;
-        }
-        .cart-total {
-            padding: 10px;
-            border-top: 1px solid #ccc;
-            text-align: center;
         }
     </style>
 </head>
@@ -244,12 +132,7 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <a class="cart-link" id="cart-link">Cart</a>
-        <div class="cart-dropdown" id="cart-dropdown">
-            <ul id="cart-dropdown-list"></ul>
-            <div class="cart-total" id="cart-dropdown-total"></div>
-            <a href="checkout.html" class="checkout-button">Go to Checkout</a>
-        </div>
+        <a class="cart-link" id="cart-link">Cart (0)</a>
     </header>
     <main class="main-content">
         <div class="checkout-container">
@@ -257,128 +140,84 @@
             <div id="checkout-items"></div>
             <div class="checkout-total" id="checkout-total"></div>
             <div class="empty-cart" id="empty-cart" style="display: none;">There's nothing in your cart</div>
-            <button class="checkout-button" id="update-cart">Update Cart</button>
             <button class="checkout-button" id="proceed-to-payment">Proceed to Payment</button>
         </div>
     </main>
     <footer>
-        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+        <p>Footer content here</p>
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const cartLink = document.getElementById('cart-link');
-            const cartDropdown = document.getElementById('cart-dropdown');
-            const cartDropdownList = document.getElementById('cart-dropdown-list');
-            const cartDropdownTotal = document.getElementById('cart-dropdown-total');
             const checkoutItems = document.getElementById('checkout-items');
             const checkoutTotal = document.getElementById('checkout-total');
             const emptyCart = document.getElementById('empty-cart');
-            const updateCartBtn = document.getElementById('update-cart');
             const proceedToPayment = document.getElementById('proceed-to-payment');
+            const cartLink = document.getElementById('cart-link');
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            const updateDropdownCart = () => {
-                cartDropdownList.innerHTML = '';
-                if (cart.length === 0) {
-                    cartDropdownTotal.innerHTML = "There's nothing in your cart";
-                    return;
-                }
-                let total = 0;
-                cart.forEach(product => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        <img src="images/snare.jpg" alt="${product.name}">
-                        <div>
-                            <p>${product.name}</p>
-                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
-                            <span class="item-remove" data-id="${product.id}" style="cursor: pointer; color: red;">Remove</span>
-                        </div>
-                    `;
-                    cartDropdownList.appendChild(listItem);
-                    total += product.price * product.quantity;
-                });
-                cartDropdownTotal.innerHTML = `Total: $${total.toFixed(2)}`;
-
-                document.querySelectorAll('.item-remove').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = e.target.dataset.id;
-                        cart = cart.filter(product => product.id !== productId);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        updateDropdownCart();
-                        updateCheckoutPage();
-                        updateCartIcon();
-                    });
-                });
-            };
-
-            const updateCheckoutPage = () => {
+            const renderCart = () => {
                 checkoutItems.innerHTML = '';
                 if (cart.length === 0) {
                     emptyCart.style.display = 'block';
                     checkoutTotal.style.display = 'none';
-                    updateCartBtn.style.display = 'none';
                     proceedToPayment.style.display = 'none';
                     return;
                 }
+
                 emptyCart.style.display = 'none';
                 checkoutTotal.style.display = 'block';
-                updateCartBtn.style.display = 'block';
                 proceedToPayment.style.display = 'block';
 
+                let total = 0;
                 cart.forEach(product => {
-                    const item = document.createElement('div');
-                    item.classList.add('checkout-item');
-                    item.innerHTML = `
+                    const checkoutItem = document.createElement('div');
+                    checkoutItem.classList.add('checkout-item');
+                    checkoutItem.innerHTML = `
                         <img src="images/snare.jpg" alt="${product.name}">
                         <div class="item-info">
                             <h4>${product.name}</h4>
                             <div class="item-controls">
                                 <input type="number" value="${product.quantity}" min="1" data-id="${product.id}">
-                                <span class="item-remove" data-id="${product.id}" style="cursor: pointer; color: red;">Remove</span>
+                                <span class="item-remove" data-id="${product.id}" style="cursor: pointer; color: red;">&times;</span>
                             </div>
                         </div>
                         <p>${product.quantity} x $${product.price.toFixed(2)}</p>
                     `;
-                    checkoutItems.appendChild(item);
+                    checkoutItems.appendChild(checkoutItem);
+                    total += product.price * product.quantity;
                 });
-
-                const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
                 checkoutTotal.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
 
                 document.querySelectorAll('.item-remove').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = e.target.dataset.id;
-                        cart = cart.filter(product => product.id !== productId);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        updateCheckoutPage();
-                        updateDropdownCart();
-                        updateCartIcon();
-                    });
+                    button.addEventListener('click', removeItem);
                 });
 
                 document.querySelectorAll('.item-controls input').forEach(input => {
-                    input.addEventListener('change', (e) => {
-                        const productId = e.target.dataset.id;
-                        const newQuantity = parseInt(e.target.value);
-                        const product = cart.find(product => product.id === productId);
-                        if (product && newQuantity > 0) {
-                            product.quantity = newQuantity;
-                            localStorage.setItem('cart', JSON.stringify(cart));
-                            updateCheckoutPage();
-                            updateDropdownCart();
-                            updateCartIcon();
-                        } else if (newQuantity <= 0) {
-                            cart = cart.filter(product => product.id !== productId);
-                            localStorage.setItem('cart', JSON.stringify(cart));
-                            updateCheckoutPage();
-                            updateDropdownCart();
-                            updateCartIcon();
-                        }
-                    });
+                    input.addEventListener('change', updateQuantity);
                 });
+            };
+
+            const removeItem = (e) => {
+                const productId = e.target.dataset.id;
+                cart = cart.filter(product => product.id !== productId);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                updateCartIcon();
+            };
+
+            const updateQuantity = (e) => {
+                const productId = e.target.dataset.id;
+                const newQuantity = parseInt(e.target.value);
+                const product = cart.find(product => product.id === productId);
+                if (product && newQuantity > 0) {
+                    product.quantity = newQuantity;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                    updateCartIcon();
+                } else if (newQuantity <= 0) {
+                    removeItem(e);
+                }
             };
 
             const updateCartIcon = () => {
@@ -386,38 +225,12 @@
                 cartLink.innerText = `Cart (${totalQuantity})`;
             };
 
-            cartLink.addEventListener('click', () => {
-                cartDropdown.classList.toggle('active');
-            });
-
-            window.addEventListener('click', (e) => {
-                if (!cartLink.contains(e.target) && !cartDropdown.contains(e.target)) {
-                    cartDropdown.classList.remove('active');
-                }
-            });
-
-            updateCheckoutPage();
-            updateCartIcon();
-            updateDropdownCart();
-
             proceedToPayment.addEventListener('click', () => {
                 alert('Proceeding to payment');
             });
 
-            updateCartBtn.addEventListener('click', () => {
-                document.querySelectorAll('.checkout-item input[type="number"]').forEach(input => {
-                    const productId = input.dataset.id;
-                    const newQuantity = parseInt(input.value);
-                    const product = cart.find(product => product.id === productId);
-                    if (product && newQuantity > 0) {
-                        product.quantity = newQuantity;
-                    }
-                });
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCheckoutPage();
-                updateDropdownCart();
-                updateCartIcon();
-            });
+            renderCart();
+            updateCartIcon();
         });
     </script>
 </body>
