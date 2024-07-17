@@ -6,15 +6,14 @@
     <title>Checkout - Crab Snare Co.</title>
     <link href="styles.css" rel="stylesheet">
     <style>
-        /* Additional styling for the checkout page */
+        /* Basic styling */
         html, body {
             margin: 0;
             padding: 0;
             font-family: "Mestiza Sans", sans-serif;
             font-weight: 400;
             font-style: normal;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            height: 100%; /* Ensure body takes full height */
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -60,11 +59,11 @@
             cursor: pointer;
         }
         .main-content {
-            flex: 1; /* Allow main content to grow and fill space */
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #F2E6D8; /* Beige background */
+            background-color: #F2E6D8;
             padding: 20px;
         }
         .checkout-container {
@@ -82,15 +81,52 @@
         .checkout-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
         }
         .checkout-item img {
-            width: 50px;
+            width: 150px; /* Larger image */
             height: auto;
-            margin-right: 10px;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+        .checkout-item div {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .checkout-item .item-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .checkout-item .item-controls {
+            display: flex;
+            align-items: center;
+        }
+        .checkout-item .item-controls input {
+            width: 50px;
+            padding: 5px;
+            margin: 0 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .checkout-item .item-controls .item-remove {
+            cursor: pointer;
+            color: red;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .checkout-item .item-controls .item-remove:hover {
+            text-decoration: underline;
         }
         .checkout-total {
-            text-align: right;
+            text-align: center;
             margin-top: 20px;
             font-size: 18px;
         }
@@ -105,14 +141,21 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
         .checkout-button:hover {
             background-color: #555;
         }
+        .empty-cart {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #777;
+        }
         footer {
             background: #F2E6D8;
             position: relative;
-            height: 100px; /* Adjust as needed */
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -146,6 +189,49 @@
                 transform: translate(-50%, 0);
             }
         }
+        .cart-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .cart-dropdown.active {
+            display: block;
+        }
+        .cart-dropdown ul {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .cart-dropdown ul li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-dropdown ul li img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .cart-dropdown ul li div {
+            flex: 1;
+        }
+        .cart-dropdown ul li p {
+            margin: 0;
+        }
+        .cart-total {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -158,13 +244,20 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <a href="#" class="cart-link" id="cart-link">Cart</a>
+        <a class="cart-link" id="cart-link">Cart</a>
+        <div class="cart-dropdown" id="cart-dropdown">
+            <ul id="cart-dropdown-list"></ul>
+            <div class="cart-total" id="cart-dropdown-total"></div>
+            <a href="checkout.html" class="checkout-button">Go to Checkout</a>
+        </div>
     </header>
     <main class="main-content">
         <div class="checkout-container">
             <h1 class="checkout-header">Checkout</h1>
             <div id="checkout-items"></div>
             <div class="checkout-total" id="checkout-total"></div>
+            <div class="empty-cart" id="empty-cart" style="display: none;">There's nothing in your cart</div>
+            <button class="checkout-button" id="update-cart">Update Cart</button>
             <button class="checkout-button" id="proceed-to-payment">Proceed to Payment</button>
         </div>
     </main>
@@ -173,110 +266,160 @@
         <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
         <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
     </footer>
-    <div class="cart-dropdown" id="cart-dropdown">
-        <div class="cart-content" id="cart-content"></div>
-        <div id="checkout-btn">Checkout</div>
-        <div id="close-cart">Close</div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cartLink = document.getElementById('cart-link');
             const cartDropdown = document.getElementById('cart-dropdown');
-            const cartContent = document.getElementById('cart-content');
-            const closeCartBtn = document.getElementById('close-cart');
-            const checkoutBtn = document.getElementById('checkout-btn');
-
-            cartLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                cartDropdown.classList.toggle('active');
-                updateCartContent();
-            });
-
-            closeCartBtn.addEventListener('click', () => {
-                cartDropdown.classList.remove('active');
-            });
-
-            window.addEventListener('click', (event) => {
-                if (event.target !== cartLink && !cartDropdown.contains(event.target)) {
-                    cartDropdown.classList.remove('active');
-                }
-            });
-
-            const proceedToPayment = document.getElementById('proceed-to-payment');
+            const cartDropdownList = document.getElementById('cart-dropdown-list');
+            const cartDropdownTotal = document.getElementById('cart-dropdown-total');
             const checkoutItems = document.getElementById('checkout-items');
             const checkoutTotal = document.getElementById('checkout-total');
+            const emptyCart = document.getElementById('empty-cart');
+            const updateCartBtn = document.getElementById('update-cart');
+            const proceedToPayment = document.getElementById('proceed-to-payment');
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+            const updateDropdownCart = () => {
+                cartDropdownList.innerHTML = '';
+                if (cart.length === 0) {
+                    cartDropdownTotal.innerHTML = "There's nothing in your cart";
+                    return;
+                }
+                let total = 0;
+                cart.forEach(product => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <img src="images/snare.jpg" alt="${product.name}">
+                        <div>
+                            <p>${product.name}</p>
+                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
+                            <span class="item-remove" data-id="${product.id}" style="cursor: pointer; color: red;">Remove</span>
+                        </div>
+                    `;
+                    cartDropdownList.appendChild(listItem);
+                    total += product.price * product.quantity;
+                });
+                cartDropdownTotal.innerHTML = `Total: $${total.toFixed(2)}`;
+
+                document.querySelectorAll('.item-remove').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.dataset.id;
+                        cart = cart.filter(product => product.id !== productId);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateDropdownCart();
+                        updateCheckoutPage();
+                        updateCartIcon();
+                    });
+                });
+            };
+
             const updateCheckoutPage = () => {
                 checkoutItems.innerHTML = '';
+                if (cart.length === 0) {
+                    emptyCart.style.display = 'block';
+                    checkoutTotal.style.display = 'none';
+                    updateCartBtn.style.display = 'none';
+                    proceedToPayment.style.display = 'none';
+                    return;
+                }
+                emptyCart.style.display = 'none';
+                checkoutTotal.style.display = 'block';
+                updateCartBtn.style.display = 'block';
+                proceedToPayment.style.display = 'block';
+
                 cart.forEach(product => {
                     const item = document.createElement('div');
                     item.classList.add('checkout-item');
                     item.innerHTML = `
                         <img src="images/snare.jpg" alt="${product.name}">
-                        <div>
+                        <div class="item-info">
                             <h4>${product.name}</h4>
-                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
+                            <div class="item-controls">
+                                <input type="number" value="${product.quantity}" min="1" data-id="${product.id}">
+                                <span class="item-remove" data-id="${product.id}" style="cursor: pointer; color: red;">Remove</span>
+                            </div>
                         </div>
+                        <p>${product.quantity} x $${product.price.toFixed(2)}</p>
                     `;
                     checkoutItems.appendChild(item);
                 });
+
                 const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
                 checkoutTotal.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
-            };
 
-            const updateCartContent = () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cartContent.innerHTML = '';
-
-                cart.forEach((product, index) => {
-                    const cartItem = document.createElement('div');
-                    cartItem.classList.add('cart-item');
-
-                    cartItem.innerHTML = `
-                        <img src="images/snare.jpg" alt="${product.name}">
-                        <div>
-                            <div>${product.name}</div>
-                            <div>Quantity: ${product.quantity}</div>
-                            <div>Price: $${(product.price * product.quantity).toFixed(2)}</div>
-                        </div>
-                        <span class="cart-item-remove" data-index="${index}">Remove</span>
-                    `;
-
-                    cartContent.appendChild(cartItem);
+                document.querySelectorAll('.item-remove').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.dataset.id;
+                        cart = cart.filter(product => product.id !== productId);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCheckoutPage();
+                        updateDropdownCart();
+                        updateCartIcon();
+                    });
                 });
 
-                const removeButtons = cartContent.querySelectorAll('.cart-item-remove');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const index = event.target.getAttribute('data-index');
-                        cart.splice(index, 1);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        updateCartContent();
-                        updateCartIcon();
-                        updateCheckoutPage();
+                document.querySelectorAll('.item-controls input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const productId = e.target.dataset.id;
+                        const newQuantity = parseInt(e.target.value);
+                        const product = cart.find(product => product.id === productId);
+                        if (product && newQuantity > 0) {
+                            product.quantity = newQuantity;
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            updateCheckoutPage();
+                            updateDropdownCart();
+                            updateCartIcon();
+                        } else if (newQuantity <= 0) {
+                            cart = cart.filter(product => product.id !== productId);
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            updateCheckoutPage();
+                            updateDropdownCart();
+                            updateCartIcon();
+                        }
                     });
                 });
             };
 
             const updateCartIcon = () => {
                 const totalQuantity = cart.reduce((sum, product) => sum + product.quantity, 0);
-                document.getElementById('cart-link').innerText = `Cart (${totalQuantity})`;
+                cartLink.innerText = `Cart (${totalQuantity})`;
             };
+
+            cartLink.addEventListener('click', () => {
+                cartDropdown.classList.toggle('active');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!cartLink.contains(e.target) && !cartDropdown.contains(e.target)) {
+                    cartDropdown.classList.remove('active');
+                }
+            });
 
             updateCheckoutPage();
             updateCartIcon();
+            updateDropdownCart();
 
             proceedToPayment.addEventListener('click', () => {
-                // Redirect to payment page or handle payment
                 alert('Proceeding to payment');
             });
 
-            checkoutBtn.addEventListener('click', () => {
-                window.location.href = 'checkout.html';
+            updateCartBtn.addEventListener('click', () => {
+                document.querySelectorAll('.checkout-item input[type="number"]').forEach(input => {
+                    const productId = input.dataset.id;
+                    const newQuantity = parseInt(input.value);
+                    const product = cart.find(product => product.id === productId);
+                    if (product && newQuantity > 0) {
+                        product.quantity = newQuantity;
+                    }
+                });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCheckoutPage();
+                updateDropdownCart();
+                updateCartIcon();
             });
         });
     </script>
 </body>
 </html>
+
