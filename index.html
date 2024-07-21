@@ -26,6 +26,7 @@
             flex-grow: 1;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
         nav ul {
             list-style: none;
@@ -51,7 +52,6 @@
 
         .cart-link {
             position: relative;
-            margin-left: 20px;
             color: #333;
             text-decoration: none;
             font-size: 18px;
@@ -134,9 +134,17 @@
             background: url('images/caliocean.webp') no-repeat center center;
             background-size: cover;
         }
-        .logo img {
-            width: 200px; /* Adjust the size of the logo image here */
-            height: auto;
+        .hero .coming-soon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
         }
         .content-backdrop {
             padding: 20px;
@@ -193,7 +201,7 @@
     </header>
     <main>
         <section class="hero">
-            <div class="logo"><img src="images/FullLogo_Transparent.png" alt="Crab Snare Co."></div>
+            <div class="coming-soon">COMING SOON.<br>WEBSITE UNDER CONSTRUCTION.</div>
         </section>
         <div class="content-backdrop">
             <section class="featured-product">
