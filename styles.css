@@ -61,7 +61,7 @@ header {
     z-index: 1000; /* Ensure header is above other content */
 }
 
-.hamburger-menu, .logo, .searchBox, .cart-icon {
+.hamburger-menu, .logo, .cart-icon {
     display: inline-block;
 }
 
@@ -128,51 +128,6 @@ header {
 
 .overlay.active {
     display: block;
-}
-
-.searchBox {
-    position: relative;
-    background: #2f3640; /* Dark grey color */
-    height: 40px;
-    border-radius: 40px;
-    padding: 10px;
-    margin-left: 20px; /* Adjust as needed */
-}
-
-.searchBox:hover > .searchInput {
-    width: 240px;
-    padding: 0 6px;
-}
-
-.searchBox:hover > .searchButton {
-    background: white;
-    color: #2f3640;
-}
-
-.searchButton {
-    color: white;
-    float: right;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #2f3640;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.4s;
-}
-
-.searchInput {
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
 }
 
 .cart-icon {
@@ -308,7 +263,7 @@ footer {
         align-items: center;
     }
 
-    .searchBox, .cart-icon {
+    .cart-icon {
         margin: 10px 0;
     }
 
@@ -325,6 +280,7 @@ footer {
         width: 100%;
     }
 }
+
 /* Additional CSS for the cart dropdown and cart link */
 .cart-link {
     position: relative;
