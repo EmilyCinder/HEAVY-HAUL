@@ -2,472 +2,174 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crab Snare Co.</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="search-index.js"></script>
-    <script src="scripts.js"></script>
-    <style>
-        @font-face {
-            font-family: 'Mestiza Sans';
-            src: url('fonts/mestiza-sans-regular.woff2') format('woff2'),
-                 url('fonts/mestiza-sans-regular.woff') format('woff');
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Mestiza Sans';
-            src: url('fonts/mestiza-sans-bold.woff2') format('woff2'),
-                 url('fonts/mestiza-sans-bold.woff') format('woff');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        html, body {
-            font-family: "Mestiza Sans", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            height: 100%;
-            width: 100%;
-        }
-
-        body {
-            font-family: "Mestiza Sans", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            position: relative;
-            min-height: 100vh;
-            background: #F2E6D8;
-            background-size: cover;
-        }
-
-        header {
-            background-color: #F2E6D8; /* Beige background */
-            padding: 10px 20px; /* Adjust this to match the padding in index.html */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px; /* Set a fixed height to match contact.html */
-        }
-
-        nav {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Center align items vertically */
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            transition: background-color 0.3s, color 0.3s;
-            line-height: 40px; /* Adjust to center align text vertically */
-        }
-
-        nav ul li a:hover {
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        .cart-link {
-            position: relative;
-            margin-left: 20px;
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-            cursor: pointer;
-            line-height: 40px; /* Adjust to center align text vertically */
-        }
-
-        .cart-dropdown {
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 1000;
-        }
-
-        .cart-dropdown.active {
-            display: block;
-        }
-
-        .cart-content {
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .cart-item img {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .cart-item div {
-            flex: 1;
-        }
-
-        .cart-total {
-            text-align: right;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-
-        .cart-item-remove {
-            color: red;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        #close-cart, #checkout-btn {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        #close-cart:hover, #checkout-btn:hover {
-            background-color: #555;
-        }
-
-        .hero {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px;
-            background: url('images/caliocean.webp') no-repeat center center;
-            background-size: cover;
-            text-align: center;
-        }
-
-        .hero .coming-soon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 24px;
-        }
-
-        .content-backdrop {
-            width: 80%;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            margin-top: -20px;
-            padding: 20px 0;
-        }
-
-        .featured-product {
-            text-align: center;
-            margin-top: 100px;
-        }
-
-        .featured-product .section-title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .featured-product .product {
-            display: inline-block;
-            margin: 60px;
-            transition: transform 0.3s;
-        }
-
-        .featured-product .product img {
-            width: 600px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .featured-product .product:hover {
-            transform: scale(1.05);
-        }
-
-        .featured-product .product-title {
-            margin: 20px 0 10px;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .featured-product .price {
-            font-size: 20px;
-            color: #333;
-        }
-
-        footer {
-            background: #F2E6D8;
-            position: relative;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .wave {
-            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
-            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
-            background-size: 50% 100%;
-            bottom: -5%;
-            height: calc(var(--height, 0) * 1vh);
-            left: 0;
-            opacity: var(--opacity);
-            position: absolute;
-            right: 0;
-            width: calc(var(--width, 0) * 1vw);
-            will-change: transform;
-        }
-
-        .wave:nth-of-type(1) {
-            z-index: 1;
-        }
-
-        .wave:nth-of-type(2) {
-            z-index: 2;
-        }
-
-        .wave:nth-of-type(3) {
-            z-index: 3;
-        }
-
-        @keyframes wave {
-            to {
-                transform: translate(-50%, 0);
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            header {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero {
-                height: 300px;
-            }
-
-            .hero .coming-soon {
-                font-size: 20px;
-                padding: 15px;
-            }
-
-            .cart-dropdown {
-                right: 10px;
-                width: 90%;
-            }
-
-            .content-backdrop {
-                width: 90%;
-                margin-top: 20px;
-            }
-
-            .featured-product .product img {
-                width: 100%;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .hero {
-                height: 200px;
-            }
-
-            .hero .coming-soon {
-                font-size: 18px;
-                padding: 10px;
-            }
-
-            .cart-link {
-                font-size: 16px;
-                align-self: flex-end;
-            }
-
-            #close-cart, #checkout-btn {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-
-            .product img {
-                width: 100%;
-                height: auto;
-            }
-
-            .product {
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crab Snare Co.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="styles.css" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Mestiza Sans';
+      src: url('fonts/mestiza-sans-regular.woff2') format('woff2'),
+           url('fonts/mestiza-sans-regular.woff') format('woff');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'Mestiza Sans';
+      src: url('fonts/mestiza-sans-bold.woff2') format('woff2'),
+           url('fonts/mestiza-sans-bold.woff') format('woff');
+      font-weight: 700;
+    }
+    body {
+      font-family: 'Mestiza Sans', sans-serif;
+    }
+    .wave {
+      animation: wave calc(var(--speed, 0) * 1s) infinite linear;
+      background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
+      background-size: 50% 100%;
+      bottom: -5%;
+      height: calc(var(--height, 0) * 1vh);
+      left: 0;
+      opacity: var(--opacity);
+      position: absolute;
+      right: 0;
+      width: calc(var(--width, 0) * 1vw);
+      will-change: transform;
+    }
+    @keyframes wave {
+      to {
+        transform: translate(-50%, 0);
+      }
+    }
+  </style>
 </head>
 
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="#" class="cart-link" id="cart-link">Cart</a>
-    </header>
-    <main>
-        <section class="hero">
-            <div class="coming-soon">COMING SOON.<br>WEBSITE UNDER CONSTRUCTION.</div>
-        </section>
-        <div class="content-backdrop">
-            <section class="featured-product">
-                <h2 class="section-title">Featured Product</h2>
-                <div class="product">
-                    <a href="unweighted-snare.html">
-                        <img src="images/snare.jpg" alt="Featured Product">
-                    </a>
-                    <h2 class="product-title">Heavy Haul Unweighted Snare</h2>
-                    <p class="price">$10.00</p>
-                </div>
-            </section>
-            <!-- Add more content sections here as needed -->
-        </div>
-    </main>
-    <footer>
-        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
-    </footer>
-    <div class="cart-dropdown" id="cart-dropdown">
-        <div class="cart-content" id="cart-content"></div>
-        <div id="checkout-btn">Checkout</div>
-        <div id="close-cart">Close</div>
+<body class="bg-[#F2E6D8] text-gray-800">
+  <header class="bg-[#F2E6D8] p-4 flex justify-between items-center h-16 relative">
+    <nav class="flex-1 flex justify-center">
+      <ul class="flex gap-6 text-lg">
+        <li><a href="index.html" class="font-bold hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Home</a></li>
+        <li><a href="products.html" class="font-bold hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Products</a></li>
+        <li><a href="about.html" class="font-bold hover:text-white hover:bg-gray-800 px-3 py-2 rounded">About</a></li>
+        <li><a href="contact.html" class="font-bold hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="cart-link" class="relative text-lg">
+      <span class="material-icons">shopping_cart</span>
+      <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+    </button>
+    <div id="cart-dropdown" class="hidden fixed top-20 right-4 w-96 max-w-full bg-white rounded-lg shadow-lg z-50 p-4">
+      <h3 class="text-xl font-bold mb-4">Your Cart</h3>
+      <div id="cart-content" class="space-y-4 max-h-80 overflow-y-auto"></div>
+      <div class="text-right font-semibold mt-4" id="cart-total"></div>
+      <div class="flex justify-between mt-6">
+        <button id="checkout-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Checkout</button>
+        <button id="close-cart" class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400">Close</button>
+      </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cartLink = document.getElementById('cart-link');
-            const cartDropdown = document.getElementById('cart-dropdown');
-            const cartContent = document.getElementById('cart-content');
-            const closeCartBtn = document.getElementById('close-cart');
-            const checkoutBtn = document.getElementById('checkout-btn');
+  </header>
 
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  <main>
+    <section class="relative flex items-center justify-center h-[400px] bg-cover bg-center text-white text-center" style="background-image: url('images/caliocean.webp');">
+      <div class="bg-black bg-opacity-50 p-6 rounded text-2xl md:text-3xl">COMING SOON.<br>WEBSITE UNDER CONSTRUCTION.</div>
+    </section>
 
-            const updateCartIcon = () => {
-                const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
-                document.querySelector('.cart-link').innerText = `Cart (${totalQuantity})`;
-            };
+    <section class="w-11/12 max-w-5xl mx-auto bg-white mt-[-20px] py-10 text-center">
+      <h2 class="text-4xl mb-6">Featured Product</h2>
+      <div class="inline-block m-4 hover:scale-105 transform transition">
+        <img src="images/snare.jpg" alt="Featured Product" class="rounded-lg shadow-lg w-72 md:w-96">
+        <h3 class="mt-4 text-2xl">Heavy Haul Unweighted Snare</h3>
+        <p class="text-xl mb-2">$10.00</p>
+        <button onclick="addToCart('Heavy Haul Unweighted Snare', 10.00)" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600">Add to Cart</button>
+      </div>
+    </section>
+  </main>
 
-            const updateCartContent = () => {
-                cartContent.innerHTML = '';
-                cart.forEach((product, index) => {
-                    const item = document.createElement('div');
-                    item.classList.add('cart-item');
-                    item.innerHTML = `
-                        <img src="images/snare.jpg" alt="${product.name}">
-                        <div>
-                            <h4>${product.name}</h4>
-                            <p>${product.quantity} x $${product.price.toFixed(2)}</p>
-                        </div>
-                        <span class="cart-item-remove" data-index="${index}">&times;</span>
-                    `;
-                    cartContent.appendChild(item);
-                });
-                const total = cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-                const totalEl = document.createElement('div');
-                totalEl.classList.add('cart-total');
-                totalEl.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
-                cartContent.appendChild(totalEl);
-            };
+  <footer class="bg-[#F2E6D8] relative h-[100px] flex items-center justify-center w-full">
+    <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
+    <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
+    <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+  </footer>
 
-            const toggleCartDropdown = () => {
-                cartDropdown.classList.toggle('active');
-                updateCartContent();
-            };
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartLink = document.getElementById('cart-link');
+      const cartDropdown = document.getElementById('cart-dropdown');
+      const cartContent = document.getElementById('cart-content');
+      const closeCartBtn = document.getElementById('close-cart');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
 
-            cartLink.addEventListener('click', toggleCartDropdown);
-            closeCartBtn.addEventListener('click', toggleCartDropdown);
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            cartContent.addEventListener('click', (event) => {
-                if (event.target.classList.contains('cart-item-remove')) {
-                    const index = event.target.getAttribute('data-index');
-                    cart.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartIcon();
-                    updateCartContent();
-                }
-            });
+      const updateCartIcon = () => {
+        const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = totalQuantity;
+      };
 
-            checkoutBtn.addEventListener('click', () => {
-                window.location.href = 'checkout.html';
-            });
-
-            updateCartIcon();
+      const updateCartContent = () => {
+        cartContent.innerHTML = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+          total += item.quantity * item.price;
+          const div = document.createElement('div');
+          div.className = 'flex items-center justify-between';
+          div.innerHTML = `
+            <div>
+              <p class="font-bold">${item.name}</p>
+              <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+              <div class="mt-1 flex gap-2">
+                <button onclick="changeQuantity(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
+                <button onclick="changeQuantity(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
+              </div>
+            </div>
+            <button onclick="removeItem(${index})" class="text-red-500">&times;</button>
+          `;
+          cartContent.appendChild(div);
         });
+        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartIcon();
+      };
 
-        const addToCart = (productName, productPrice) => {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingProduct = cart.find(product => product.name === productName);
+      cartLink.addEventListener('click', () => {
+        cartDropdown.classList.toggle('hidden');
+        updateCartContent();
+      });
 
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                cart.push({ name: productName, price: productPrice, quantity: 1 });
-            }
+      closeCartBtn.addEventListener('click', () => {
+        cartDropdown.classList.add('hidden');
+      });
 
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartIcon();
-        };
+      checkoutBtn.addEventListener('click', () => {
+        window.location.href = 'checkout.html';
+      });
 
-        const updateCartIcon = () => {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
-            document.querySelector('.cart-link').innerText = `Cart (${totalQuantity})`;
-        };
-    </script>
+      updateCartIcon();
+
+      window.changeQuantity = (index, delta) => {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) cart.splice(index, 1);
+        updateCartContent();
+      };
+
+      window.removeItem = (index) => {
+        cart.splice(index, 1);
+        updateCartContent();
+      };
+
+      window.addToCart = (name, price) => {
+        const existing = cart.find(p => p.name === name);
+        if (existing) {
+          existing.quantity++;
+        } else {
+          cart.push({ name, price, quantity: 1 });
+        }
+        updateCartContent();
+      };
+    });
+  </script>
 </body>
-
 </html>

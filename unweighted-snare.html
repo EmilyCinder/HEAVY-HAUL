@@ -1,349 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unweighted Snare - Crab Snare Co.</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        /* Internal CSS for the unweighted snare product page */
-        html, body {
-            margin: 0;
-            padding: 0;
-            font-family: "Mestiza Sans", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
-        header {
-            background-color: #F2E6D8; /* Beige background */
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-        nav ul li {
-            display: inline;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
-        }
-        .cart-link {
-            position: relative;
-            margin-left: 20px;
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .cart-dropdown {
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 1000;
-        }
-        .cart-dropdown.active {
-            display: block;
-        }
-        .cart-content {
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .cart-item img {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-        .cart-item div {
-            flex: 1;
-        }
-        .cart-total {
-            text-align: right;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .cart-item-remove {
-            color: red;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        #close-cart, #checkout-btn {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-        }
-        #close-cart:hover, #checkout-btn:hover {
-            background-color: #555;
-        }
-        .hero {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px; /* Adjust as needed */
-            background: url('images/caliocean.webp') no-repeat center center;
-            background-size: cover;
-        }
-        .logo img {
-            width: 200px; /* Adjust the size of the logo image here */
-            height: auto;
-        }
-        .content-backdrop {
-            padding: 20px;
-        }
-        .product-panel {
-            background-color: white;
-            padding: 20px;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            margin: 0 auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .product-panel img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .product-panel h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .product-panel p {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .product-panel label {
-            font-size: 18px;
-            color: #333;
-        }
-        .product-panel input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        .product-panel button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .product-panel button:hover {
-            background-color: #555;
-        }
-        footer {
-            background: #F2E6D8;
-            position: relative;
-            height: 100px; /* Adjust as needed */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .wave {
-            animation: wave calc(var(--speed, 0) * 1s) infinite linear;
-            background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
-            background-size: 50% 100%;
-            bottom: -5%;
-            height: calc(var(--height, 0) * 1vh);
-            left: 0;
-            opacity: var(--opacity);
-            position: absolute;
-            right: 0;
-            width: calc(var(--width, 0) * 1vw);
-            will-change: transform;
-        }
-        .wave:nth-of-type(1) {
-            z-index: 1;
-        }
-        .wave:nth-of-type(2) {
-            z-index: 2;
-        }
-        .wave:nth-of-type(3) {
-            z-index: 3;
-        }
-        @keyframes wave {
-            to {
-                transform: translate(-50%, 0);
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unweighted Snare - Crab Snare Co.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Mestiza Sans';
+      src: url('fonts/mestiza-sans-regular.woff2') format('woff2'),
+           url('fonts/mestiza-sans-regular.woff') format('woff');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'Mestiza Sans';
+      src: url('fonts/mestiza-sans-bold.woff2') format('woff2'),
+           url('fonts/mestiza-sans-bold.woff') format('woff');
+      font-weight: 700;
+    }
+    body {
+      font-family: 'Mestiza Sans', sans-serif;
+    }
+    .wave {
+      animation: wave calc(var(--speed, 0) * 1s) infinite linear;
+      background-image: url("https://assets.codepen.io/605876/wave--infinite.svg");
+      background-size: 50% 100%;
+      bottom: -5%;
+      height: calc(var(--height, 0) * 1vh);
+      left: 0;
+      opacity: var(--opacity);
+      position: absolute;
+      right: 0;
+      width: calc(var(--width, 0) * 1vw);
+      will-change: transform;
+    }
+    @keyframes wave {
+      to {
+        transform: translate(-50%, 0);
+      }
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="#" class="cart-link" id="cart-link">Cart</a>
-    </header>
-    <main>
-        <div class="product-panel">
-            <img src="images/snare.jpg" alt="Heavy Haul Unweighted Snare">
-            <h1>Heavy Haul Unweighted Snare</h1>
-            <p>Cost effective solution to effectively snare crabs! The unweighted crab snare allows you to attach whatever weight is best for your tidal and swell conditions that day. The slim cage design allows you to cast further, and the ruggedness of the bait enclosure means you can take whatever the surf throws at you. Just attach your desired weight to the 220-pound test duo-lock snap, and you’re ready to go!</p>
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
-            <button id="add-to-cart" data-product-id="1" data-product-name="Heavy Haul Unweighted Snare" data-product-price="10.00">Add to Cart - $10.00</button>
-        </div>
-    </main>
-    <footer>
-        <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
-        <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
-    </footer>
-    <div class="cart-dropdown" id="cart-dropdown">
-        <div class="cart-content" id="cart-content"></div>
-        <div id="checkout-btn">Checkout</div>
-        <div id="close-cart">Close</div>
+
+<body class="bg-[#F2E6D8] text-gray-800">
+  <header class="bg-[#F2E6D8] p-4 flex justify-between items-center h-16 relative">
+    <nav class="flex-1 flex justify-center">
+      <ul class="flex gap-6 text-lg font-bold">
+        <li><a href="index.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Home</a></li>
+        <li><a href="products.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Products</a></li>
+        <li><a href="about.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">About</a></li>
+        <li><a href="contact.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="cart-link" class="relative text-lg font-bold">Cart</button>
+
+    <div id="cart-dropdown" class="hidden absolute right-4 top-16 w-80 bg-white rounded-lg shadow-xl z-50 p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold">Your Cart</h3>
+        <button id="close-cart" class="text-gray-500 hover:text-gray-700">✕</button>
+      </div>
+      <div id="cart-content" class="max-h-60 overflow-y-auto divide-y divide-gray-200"></div>
+      <div id="checkout-btn" class="mt-4 bg-gray-800 text-white text-center px-4 py-2 rounded cursor-pointer hover:bg-gray-700">Checkout</div>
     </div>
-    <script>
-        // JavaScript for cart functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const cartLink = document.getElementById('cart-link');
-            const cartDropdown = document.getElementById('cart-dropdown');
-            const cartContent = document.getElementById('cart-content');
-            const closeCartBtn = document.getElementById('close-cart');
-            const checkoutBtn = document.getElementById('checkout-btn');
+  </header>
 
-            cartLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                cartDropdown.classList.toggle('active');
-                updateCartContent();
-            });
+  <main class="py-10 px-4">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <img src="images/snare.jpg" alt="Heavy Haul Unweighted Snare" class="rounded mb-6">
+      <h1 class="text-3xl font-bold mb-4">Heavy Haul Unweighted Snare</h1>
+      <p class="text-lg mb-4">Cost effective solution to effectively snare crabs! The unweighted crab snare allows you to attach whatever weight is best for your tidal and swell conditions that day. The slim cage design allows you to cast further, and the ruggedness of the bait enclosure means you can take whatever the surf throws at you. Just attach your desired weight to the 220-pound test duo-lock snap, and you’re ready to go!</p>
+      <label for="quantity" class="block text-lg mb-2">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" value="1" min="1" class="border px-2 py-1 mb-4 w-20">
+      <button id="add-to-cart" data-product-id="1" data-product-name="Heavy Haul Unweighted Snare" data-product-price="10.00" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600">Add to Cart - $10.00</button>
+    </div>
+  </main>
 
-            closeCartBtn.addEventListener('click', () => {
-                cartDropdown.classList.remove('active');
-            });
+  <footer class="bg-[#F2E6D8] relative h-[100px] flex items-center justify-center w-full">
+    <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
+    <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
+    <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
+  </footer>
 
-            window.addEventListener('click', (event) => {
-                if (event.target !== cartLink && !cartDropdown.contains(event.target)) {
-                    cartDropdown.classList.remove('active');
-                }
-            });
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartLink = document.getElementById('cart-link');
+      const cartDropdown = document.getElementById('cart-dropdown');
+      const cartContent = document.getElementById('cart-content');
+      const closeCartBtn = document.getElementById('close-cart');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const addToCartButton = document.getElementById('add-to-cart');
 
-            const addToCartButton = document.getElementById('add-to-cart');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            addToCartButton.addEventListener('click', () => {
-                const productId = addToCartButton.dataset.productId;
-                const productName = addToCartButton.dataset.productName;
-                const productPrice = parseFloat(addToCartButton.dataset.productPrice);
-                const productQuantity = parseInt(document.getElementById('quantity').value);
+      const updateCartIcon = () => {
+        const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+        cartLink.innerText = `Cart (${totalQuantity})`;
+      };
 
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingProductIndex = cart.findIndex(item => item.id === productId);
+      const updateCartContent = () => {
+        cartContent.innerHTML = '';
+        if (cart.length === 0) {
+          cartContent.innerHTML = '<p class="text-center text-gray-500">Your cart is empty.</p>';
+          return;
+        }
 
-                if (existingProductIndex > -1) {
-                    cart[existingProductIndex].quantity += productQuantity;
-                } else {
-                    cart.push({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        quantity: productQuantity
-                    });
-                }
-
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartIcon();
-            });
-
-            const updateCartIcon = () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
-                document.getElementById('cart-link').innerText = `Cart (${totalQuantity})`;
-            };
-
-            const updateCartContent = () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cartContent.innerHTML = '';
-
-                cart.forEach((product, index) => {
-                    const cartItem = document.createElement('div');
-                    cartItem.classList.add('cart-item');
-
-                    cartItem.innerHTML = `
-                        <img src="images/snare.jpg" alt="${product.name}">
-                        <div>
-                            <div>${product.name}</div>
-                            <div>Quantity: ${product.quantity}</div>
-                            <div>Price: $${(product.price * product.quantity).toFixed(2)}</div>
-                        </div>
-                        <span class="cart-item-remove" data-index="${index}">Remove</span>
-                    `;
-
-                    cartContent.appendChild(cartItem);
-                });
-
-                const removeButtons = cartContent.querySelectorAll('.cart-item-remove');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const index = event.target.getAttribute('data-index');
-                        cart.splice(index, 1);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        updateCartIcon();
-                        updateCartContent();
-                    });
-                });
-            };
-
-            checkoutBtn.addEventListener('click', () => {
-                window.location.href = 'checkout.html';
-            });
-
-            updateCartIcon();
+        cart.forEach((product, index) => {
+          const item = document.createElement('div');
+          item.className = 'flex justify-between items-center py-2';
+          item.innerHTML = `
+            <img src="images/snare.jpg" class="w-12 h-12 object-cover rounded mr-3" alt="${product.name}">
+            <div class="flex-1">
+              <p class="font-medium">${product.name}</p>
+              <p class="text-sm text-gray-600">${product.quantity} × $${product.price.toFixed(2)}</p>
+            </div>
+            <button class="text-red-500 text-sm" data-index="${index}">&times;</button>
+          `;
+          cartContent.appendChild(item);
         });
-    </script>
+      };
+
+      const toggleCartDropdown = () => {
+        cartDropdown.classList.toggle('hidden');
+        updateCartContent();
+      };
+
+      cartLink.addEventListener('click', toggleCartDropdown);
+      closeCartBtn.addEventListener('click', toggleCartDropdown);
+
+      cartContent.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+          const index = e.target.dataset.index;
+          cart.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCartIcon();
+          updateCartContent();
+        }
+      });
+
+      checkoutBtn.addEventListener('click', () => {
+        window.location.href = 'checkout.html';
+      });
+
+      addToCartButton.addEventListener('click', () => {
+        const productId = addToCartButton.dataset.productId;
+        const productName = addToCartButton.dataset.productName;
+        const productPrice = parseFloat(addToCartButton.dataset.productPrice);
+        const productQuantity = parseInt(document.getElementById('quantity').value);
+
+        const existingIndex = cart.findIndex(item => item.id === productId);
+        if (existingIndex > -1) {
+          cart[existingIndex].quantity += productQuantity;
+        } else {
+          cart.push({ id: productId, name: productName, price: productPrice, quantity: productQuantity });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartIcon();
+      });
+
+      updateCartIcon();
+    });
+  </script>
 </body>
+
 </html>
