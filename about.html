@@ -49,10 +49,9 @@
 </head>
 
 <body class="bg-[#F2E6D8] text-gray-800 min-h-screen flex flex-col relative">
-  <!-- Header -->
-  <header class="bg-[#F2E6D8] p-4 flex justify-between items-center h-16 relative z-20">
-    <nav class="flex-1 flex justify-center">
-      <ul class="flex gap-6 text-lg font-bold">
+  <header class="bg-[#F2E6D8] p-4 flex flex-wrap justify-between items-center h-auto md:h-16 relative z-20">
+    <nav class="w-full md:flex-1 flex justify-center mb-2 md:mb-0">
+      <ul class="flex flex-wrap justify-center gap-4 text-base md:text-lg font-bold">
         <li><a href="index.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Home</a></li>
         <li><a href="products.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">Products</a></li>
         <li><a href="about.html" class="hover:text-white hover:bg-gray-800 px-3 py-2 rounded">About</a></li>
@@ -65,31 +64,26 @@
     </button>
   </header>
 
-  <!-- Hero -->
-  <section class="h-24 bg-cover bg-center" style="background-image: url('images/caliocean.webp');"></section>
+  <section class="h-24 md:h-40 bg-cover bg-center" style="background-image: url('images/caliocean.webp');"></section>
 
-
-  <!-- Main Content -->
-  <main class="flex flex-wrap justify-center items-start gap-10 px-6 py-12 flex-1">
-    <section class="bg-white h-[500px] w-full md:w-[45%] p-6 rounded-lg shadow-lg flex flex-col justify-center">
-      <h1 class="text-3xl font-bold mb-6 text-center">About Us</h1>
-      <p class="text-lg mb-4 text-justify">Heavy Haul was founded with a passion for the art of crabbing. We specialize in creating the best quality crab snares for both amateur and professional crabbers. Our mission is to enhance your crabbing experience by providing reliable and effective tools.</p>
-      <p class="text-lg mb-4 text-justify">Our products are designed and tested by experienced crabbers to ensure maximum performance and durability. We are committed to sustainability and responsible crabbing practices, making sure that our products not only help you catch more crabs but also protect the environment.</p>
-      <div class="text-2xl font-bold text-center mt-8">Our Mission: You deserve a Heavy Haul!</div>
+  <main class="flex flex-wrap justify-center items-start gap-6 md:gap-10 px-4 md:px-6 py-10 md:py-12 flex-1">
+    <section class="bg-white w-full md:w-[45%] p-6 rounded-lg shadow-lg flex flex-col justify-center">
+      <h1 class="text-2xl md:text-3xl font-bold mb-4 text-center">About Us</h1>
+      <p class="text-base md:text-lg mb-4 text-justify">Heavy Haul was founded with a passion for the art of crabbing. We specialize in creating the best quality crab snares for both amateur and professional crabbers. Our mission is to enhance your crabbing experience by providing reliable and effective tools.</p>
+      <p class="text-base md:text-lg mb-4 text-justify">Our products are designed and tested by experienced crabbers to ensure maximum performance and durability. We are committed to sustainability and responsible crabbing practices, making sure that our products not only help you catch more crabs but also protect the environment.</p>
+      <div class="text-xl md:text-2xl font-bold text-center mt-6">Our Mission: You deserve a Heavy Haul!</div>
     </section>
 
-    <section class="h-[500px] w-full md:w-[45%] bg-cover bg-center rounded-lg shadow-lg" style="background-image: url('images/dad.jpeg'); animation: slideUp 2s forwards;"></section>
+    <section class="w-full md:w-[45%] h-64 md:h-[500px] bg-cover bg-center rounded-lg shadow-lg" style="background-image: url('images/dad.jpeg'); animation: slideUp 2s forwards;"></section>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-[#F2E6D8] relative h-[100px] flex items-center justify-center w-full">
     <div class="wave" style="--speed: 30; --opacity: 0.3; --height: 12; --width: 800;"></div>
     <div class="wave" style="--speed: 45; --opacity: 0.6; --height: 12; --width: 800;"></div>
     <div class="wave" style="--speed: 15; --opacity: 1; --height: 6; --width: 400;"></div>
   </footer>
 
-  <!-- Cart Dropdown -->
-  <div id="cart-dropdown" class="hidden absolute top-20 right-4 w-[90vw] max-w-md bg-white rounded-lg shadow-xl z-50 p-4">
+  <div id="cart-dropdown" class="hidden fixed top-20 right-4 w-[90vw] max-w-md bg-white rounded-lg shadow-xl z-50 p-4">
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-lg font-semibold">Your Cart</h3>
       <button id="close-cart" class="text-gray-500 hover:text-gray-700">&times;</button>
@@ -101,7 +95,6 @@
     </div>
   </div>
 
-  <!-- Cart Logic -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cartLink = document.getElementById('cart-link');
@@ -181,5 +174,4 @@
     });
   </script>
 </body>
-
 </html>
